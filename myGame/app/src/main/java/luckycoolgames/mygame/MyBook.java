@@ -1,4 +1,4 @@
-package luckycoolgames.mygame;
+/*package luckycoolgames.mygame;
 
 import io.realm.RealmObject;
 import io.realm.annotations.Required;
@@ -19,4 +19,4 @@ public class MyBook extends RealmObject {
         this.title = title;
 
     }
-}
+}*/

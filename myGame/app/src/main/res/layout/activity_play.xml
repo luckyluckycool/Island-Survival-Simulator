@@ -3,55 +3,119 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_play"
+    android:background="@drawable/mb_play"
     tools:context=".PlayActivity">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp">
+
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+android:layout_marginStart="10dp"
         android:background="@drawable/wood_icon" />
 
+    <TextView
+        android:id="@+id/wood_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="@font/carre"
+        android:text="55"
+        android:textColor="#000"
+        android:textSize="50dp" />
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="222dp"
-        android:layout_marginTop="0dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="10dp"
         android:background="@drawable/stone_icon" />
+    <TextView
+        android:fontFamily="@font/carre"
+        android:id="@+id/stone_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="#000"
+        android:textSize="55dp" />
 
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="102dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="10dp"
         android:background="@drawable/fiber_icon" />
 
+    <TextView
+        android:fontFamily="@font/carre"
+        android:id="@+id/fiber_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="#000"
+        android:textSize="55dp" />
+
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="370dp"
-        android:layout_marginTop="0dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="10dp"
         android:background="@drawable/food_icon" />
 
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="106dp"
-        android:layout_marginEnd="169dp"
-        android:background="@drawable/health_icon" />
+    <TextView
+        android:fontFamily="@font/carre"
+        android:id="@+id/food_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:layout_marginEnd="70dp"
+        android:textColor="#000"
+        android:textSize="55dp" />
+
+
+
 
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+
+        android:background="@drawable/health_icon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+
+        android:fontFamily="@font/carre"
+        android:textColor="#000"
+
+        android:text="0"
+        android:textSize="55dp" />
+
+</LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="71dp"
+        android:fontFamily="@font/carre"
+
+        android:text="0"
+        android:textColor="#000"
+        android:textSize="55dp" />
+
+    <ImageView
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="483dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginStart="538dp"
+        android:layout_marginTop="70dp"
         android:background="@drawable/stamina_icon" />
+
 </RelativeLayout>

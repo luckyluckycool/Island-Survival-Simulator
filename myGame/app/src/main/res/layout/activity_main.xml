@@ -2,24 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_main"
+    android:background="@drawable/mb_main"
 android:id="@+id/activity_main"
     >
 
     <TextView
 
         android:id="@+id/new_game_button"
-        style="@style/ShadowEffect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/skulls"
         android:gravity="center_horizontal"
         android:text="New Game"
-        android:textSize="115dp"
-        />
+        android:textColor="#FFF"
+        android:textSize="115dp" />
 
 
 

@@ -20,7 +20,7 @@ public class PlayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
-        button = findViewById(R.id.button);
+
         wood_text =findViewById(R.id.wood_text);
         stone_text = findViewById(R.id.stone_text);
         fiber_text = findViewById(R.id.fiber_text);
@@ -33,13 +33,6 @@ public class PlayActivity extends AppCompatActivity {
         final Health  health = new Health();
         final Stamina stamina = new Stamina();
 
-button.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        wood.add(55);
-        wood_text.setText(String.valueOf(wood.getWood()));
-    }
-});
 
     }
 }

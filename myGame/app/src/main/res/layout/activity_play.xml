@@ -4,123 +4,196 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/mb_play"
+    android:orientation="horizontal"
     tools:context=".PlayActivity">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="10dp">
 
-    <ImageView
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-android:layout_marginStart="10dp"
-        android:background="@drawable/wood_icon" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="6dp">
 
-    <TextView
-        android:id="@+id/wood_text"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="6dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/wood_icon" />
+
+                <TextView
+
+                    android:id="@+id/wood_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/carre"
+                    android:text="0"
+                    android:textColor="#000"
+                    android:textSize="30dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="10dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/stone_icon" />
+
+                <TextView
+                    android:id="@+id/stone_text"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/carre"
+                    android:text="0"
+                    android:textColor="#000"
+                    android:textSize="30dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="10dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/fiber_icon" />
+
+                <TextView
+                    android:id="@+id/fiber_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/carre"
+                    android:text="110"
+                    android:textColor="#000"
+                    android:textSize="30dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="10dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/food_icon" />
+
+                <TextView
+                    android:id="@+id/food_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/carre"
+                    android:text="0"
+                    android:textColor="#000"
+                    android:textSize="30dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:orientation="horizontal"
+
+
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/health_icon" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/stamina_icon" />
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/health_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/carre"
+                    android:text="0"
+                    android:textColor="#000"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/stamina_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/carre"
+                    android:text="0"
+                    android:textColor="#000"
+                    android:textSize="30dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_for_action_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:fontFamily="@font/carre"
-        android:text="55"
-        android:textColor="#000"
-        android:textSize="50dp" />
-    <ImageView
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="10dp"
-        android:background="@drawable/stone_icon" />
-    <TextView
-        android:fontFamily="@font/carre"
-        android:id="@+id/stone_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:textColor="#000"
-        android:textSize="55dp" />
-
-    <ImageView
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="10dp"
-        android:background="@drawable/fiber_icon" />
-
-    <TextView
-        android:fontFamily="@font/carre"
-        android:id="@+id/fiber_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:textColor="#000"
-        android:textSize="55dp" />
-
-    <ImageView
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="10dp"
-        android:background="@drawable/food_icon" />
-
-    <TextView
-        android:fontFamily="@font/carre"
-        android:id="@+id/food_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:layout_marginEnd="70dp"
-        android:textColor="#000"
-        android:textSize="55dp" />
-
-
-
-
-    <ImageView
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-
-        android:background="@drawable/health_icon" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-
-        android:fontFamily="@font/carre"
-        android:textColor="#000"
-
-        android:text="0"
-        android:textSize="55dp" />
-
-</LinearLayout>
-
-
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="62dp"
-        android:layout_marginEnd="71dp"
-        android:fontFamily="@font/carre"
-
-        android:text="0"
-        android:textColor="#000"
-        android:textSize="55dp" />
-
-    <ImageView
-        android:layout_width="65dp"
-        android:layout_height="65dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="538dp"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/stamina_icon" />
-<LinearLayout
-    android:id="@+id/layout_for_action_buttons"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"></LinearLayout>
+        android:layout_marginStart="189dp"
+        android:layout_marginTop="215dp">
 
+    </FrameLayout>
 </RelativeLayout>

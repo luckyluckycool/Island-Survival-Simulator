@@ -13,11 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LoadingActivity"
-            android:screenOrientation="landscape"
+            android:screenOrientation="userLandscape"
             android:noHistory="true"></activity>
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="landscape"
+            android:screenOrientation="userLandscape"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
         </activity>
         <activity
             android:name=".PlayActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="userLandscape" />
     </application>
 
 </manifest>

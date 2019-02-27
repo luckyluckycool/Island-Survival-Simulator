@@ -18,13 +18,13 @@ import luckycoolgames.mygame.fragments.ActionButtonFragment;
 public class PlayActivity extends AppCompatActivity {
     TextView wood_text, stone_text, fiber_text, food_text;
     Button button;
+    FragmentManager fragmentManager = getFragmentManager();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
-        FragmentManager fragmentManager = getFragmentManager();
         wood_text =findViewById(R.id.wood_text);
         stone_text = findViewById(R.id.stone_text);
         fiber_text = findViewById(R.id.fiber_text);
@@ -37,6 +37,7 @@ public class PlayActivity extends AppCompatActivity {
         final Health  health = new Health();
         final Stamina stamina = new Stamina();
 
-        fragmentManager.beginTransaction().add(R.id.layout_for_action_buttons, actionButtonFragment);
+       // fragmentManager.beginTransaction().add(R.id.frame_for_action_buttons, actionButtonFragment).commit();
+
     }
 }

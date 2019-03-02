@@ -7,6 +7,7 @@ public class Food extends BasicRes {
    public void add(int value) {
        res = food;
         super.add(value);
+        food=res;
     }
 
     @Override

@@ -25,7 +25,8 @@ public class ActionButtonFragment extends Fragment {
         gather_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentManager.beginTransaction().replace(R.id.frame_for_action_buttons, addButtonsFragment);
+                ((PlayActivity)getActivity()).fragmentManager.beginTransaction().replace(R.id.frame_for_action_buttons, addButtonsFragment).commit();
+//                fragmentManager.beginTransaction().replace(R.id.frame_for_action_buttons, addButtonsFragment).commit();
             }
         });
 

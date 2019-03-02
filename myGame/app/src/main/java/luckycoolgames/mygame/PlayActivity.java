@@ -90,7 +90,7 @@ public class PlayActivity extends AppCompatActivity {
     public void food_button_action(int value){
         food.add(value);
         list.set(foodIndex, food.get());
-        food_text.setText(list.get(fiberIndex).toString());
+        food_text.setText(list.get(foodIndex).toString());
     }
     public void fiber_button_action(int value){
         fiber.add(value);

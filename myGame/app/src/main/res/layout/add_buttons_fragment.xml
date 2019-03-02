@@ -5,34 +5,63 @@
     android:layout_height="match_parent"
     android:id="@+id/layout">
 
-
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <LinearLayout
 
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
         <ImageView
+            android:layout_gravity="center_horizontal"
+
+            android:id="@+id/gather_wood_button"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:background="@drawable/hand_gathering"
             />
         <TextView
+            android:layout_gravity="center_horizontal"
+
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:text="Gather wood"
+            android:textColor="#000"
             android:layout_marginTop="5dp"
             />
+</LinearLayout>
+        <LinearLayout
+
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </LinearLayout>
+
         <ImageView
-            android:layout_marginTop="50dp"
+            android:layout_gravity="center_horizontal"
+
+            android:id="@+id/gather_fiber_button"
             android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@drawable/hand_gathering"
-            />
+            android:layout_height="83dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/hand_gathering" />
         <TextView
+            android:layout_gravity="center_horizontal"
+
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:text="Gather fiber"
+            android:textColor="#000"
             android:layout_marginTop="5dp"
             />
 
@@ -43,32 +72,53 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <ImageView
+            android:layout_gravity="center_horizontal"
+
+            android:id="@+id/gather_stone_button"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:background="@drawable/hand_gathering"
             />
         <TextView
+            android:layout_gravity="center_horizontal"
+
             android:layout_width="90dp"
             android:layout_height="wrap_content"
-            android:text="Gather wood"
+            android:text="Gather stone"
+            android:textColor="#000"
             android:layout_marginTop="5dp"
             />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <ImageView
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/gather_food_button"
             android:layout_marginTop="50dp"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@drawable/hand_gathering"
             />
         <TextView
+            android:layout_gravity="center_horizontal"
+
             android:layout_width="90dp"
             android:layout_height="wrap_content"
-            android:text="Gather fiber"
+            android:text="Gather food"
+            android:textColor="#000"
             android:layout_marginTop="5dp"
             />
-
+        </LinearLayout>
     </LinearLayout>
 
-
+</LinearLayout>
 </LinearLayout>

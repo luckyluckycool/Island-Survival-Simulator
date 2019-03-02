@@ -9,7 +9,9 @@ public class Food extends BasicRes {
         super.add(value);
     }
 
-    public int getFood() {
-        return food;
+    @Override
+   public int get() {
+        res = food;
+        return super.get();
     }
 }

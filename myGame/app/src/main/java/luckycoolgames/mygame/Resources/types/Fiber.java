@@ -10,7 +10,10 @@ public class Fiber extends BasicRes {
         res = fiber;
         super.add(value);
     }
-    public int getFiber() {
-        return fiber;
+
+    @Override
+   public int get() {
+        res = fiber;
+        return super.get();
     }
 }

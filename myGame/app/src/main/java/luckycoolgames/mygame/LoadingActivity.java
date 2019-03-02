@@ -1,5 +1,7 @@
 package luckycoolgames.mygame;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +11,7 @@ import com.victor.loading.rotate.RotateLoading;
 
 public class LoadingActivity extends AppCompatActivity {
 RotateLoading rotateLoading;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

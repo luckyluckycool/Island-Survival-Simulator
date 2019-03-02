@@ -4,22 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoadingActivity"
-    android:background="#000000">
-    <com.victor.loading.rotate.RotateLoading
-        android:id="@+id/rotateLoading"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerInParent="true"
-        />
+    android:background="#000000"
+    tools:context=".LoadingActivity">
 
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Loading"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:textColor="#FFFFFF"
-        android:textSize="50dp" />
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.victor.loading.rotate.RotateLoading
+            android:id="@+id/rotateLoading"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Loading"
+            android:textColor="#FFFFFF"
+            android:textSize="50dp" />
+    </LinearLayout>
 </RelativeLayout>

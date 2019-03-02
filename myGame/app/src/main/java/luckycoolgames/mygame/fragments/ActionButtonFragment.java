@@ -9,11 +9,10 @@ import android.widget.LinearLayout;
 
 import luckycoolgames.mygame.R;
 
-public class AddButtonsFragment extends Fragment {
-    LinearLayout linearLayout;
+public class ActionButtonFragment extends Fragment {
+
     public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.add_buttons_fragment, container, false);
-        linearLayout = view.findViewById(R.id.layout);
+        View view = inflater.inflate(R.layout.action_buttons_fragment, container, false);
         return view;
     }
 }

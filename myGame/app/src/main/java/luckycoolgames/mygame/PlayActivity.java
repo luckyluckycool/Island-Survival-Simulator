@@ -1,5 +1,6 @@
 package luckycoolgames.mygame;
 
+import android.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,20 +13,23 @@ import luckycoolgames.mygame.Resources.types.Health;
 import luckycoolgames.mygame.Resources.types.Stamina;
 import luckycoolgames.mygame.Resources.types.Stone;
 import luckycoolgames.mygame.Resources.types.Wood;
+import luckycoolgames.mygame.fragments.ActionButtonFragment;
 
 public class PlayActivity extends AppCompatActivity {
     TextView wood_text, stone_text, fiber_text, food_text;
     Button button;
+    FragmentManager fragmentManager = getFragmentManager();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
-
         wood_text =findViewById(R.id.wood_text);
         stone_text = findViewById(R.id.stone_text);
         fiber_text = findViewById(R.id.fiber_text);
         food_text = findViewById(R.id.food_text);
-
+        ActionButtonFragment actionButtonFragment = new ActionButtonFragment();
         final Wood wood = new Wood();
         final Stone stone = new Stone();
         final Fiber fiber = new Fiber();
@@ -33,6 +37,7 @@ public class PlayActivity extends AppCompatActivity {
         final Health  health = new Health();
         final Stamina stamina = new Stamina();
 
+       // fragmentManager.beginTransaction().add(R.id.frame_for_action_buttons, actionButtonFragment).commit();
 
     }
 }

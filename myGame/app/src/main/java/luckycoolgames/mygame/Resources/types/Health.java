@@ -1,7 +1,7 @@
 package luckycoolgames.mygame.Resources.types;
 
 public class Health extends BasicRes {
-private int health;
+private int health = 100;
 
     @Override
    public void add(int value) {
@@ -10,7 +10,9 @@ private int health;
         health = res;
     }
 
-    public int getHealth() {
-        return health;
+    @Override
+   public int get() {
+        res = health;
+        return super.get();
     }
 }

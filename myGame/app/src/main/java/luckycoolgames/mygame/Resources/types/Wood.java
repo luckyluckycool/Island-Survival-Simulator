@@ -10,7 +10,9 @@ public class Wood extends BasicRes{
         wood =res;
     }
 
-    public int getWood() {
-        return wood;
+    @Override
+   public int get() {
+        res = wood;
+        return super.get();
     }
 }

@@ -15,4 +15,10 @@ public class Food extends BasicRes {
         res = food;
         return super.get();
     }
+
+    @Override
+   public void set(int value) {
+        super.set(value);
+        food = res;
+    }
 }

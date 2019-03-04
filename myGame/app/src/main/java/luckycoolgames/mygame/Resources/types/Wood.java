@@ -15,4 +15,10 @@ public class Wood extends BasicRes{
         res = wood;
         return super.get();
     }
+
+    @Override
+   public void set(int value) {
+        super.set(value);
+        wood= res;
+    }
 }

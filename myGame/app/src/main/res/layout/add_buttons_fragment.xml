@@ -21,28 +21,34 @@
 
             <ImageView
                 android:id="@+id/gather_wood_button"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
                 android:background="@drawable/hand_gathering"
                 />
 
             <ImageView
                 android:id="@+id/gather_stone_button"
-                android:layout_marginStart="70dp"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_marginStart="50dp"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
                 android:background="@drawable/hand_gathering" />
             <ImageView
                 android:id="@+id/gather_fiber_button"
-                android:layout_marginStart="70dp"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_marginStart="50dp"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
                 android:background="@drawable/hand_gathering" />
             <ImageView
                 android:id="@+id/gather_food_button"
-                android:layout_marginStart="70dp"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_marginStart="50dp"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:background="@drawable/hand_gathering" />
+            <ImageView
+                android:id="@+id/back"
+                android:layout_marginStart="50dp"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
                 android:background="@drawable/hand_gathering" />
         </LinearLayout>
 
@@ -53,7 +59,7 @@
             >
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:text="Gather sticks"
                 android:textAlignment="center"
@@ -61,8 +67,8 @@
                 android:textColor="#000"
                 android:textStyle="bold"/>
             <TextView
-                android:layout_marginStart="70dp"
-                android:layout_width="100dp"
+                android:layout_marginStart="50dp"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textSize="20sp"
@@ -70,8 +76,8 @@
                 android:textStyle="bold"
                 android:text="Gather stones"/>
             <TextView
-                android:layout_marginStart="70dp"
-                android:layout_width="100dp"
+                android:layout_marginStart="50dp"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textSize="20sp"
@@ -79,14 +85,23 @@
                 android:textStyle="bold"
                 android:text="Gather fiber"/>
             <TextView
-                android:layout_marginStart="70dp"
-                android:layout_width="100dp"
+                android:layout_marginStart="50dp"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:textColor="#000"
                 android:textStyle="bold"
                 android:text="Gather food"/>
+            <TextView
+                android:layout_marginStart="50dp"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:text="Back"/>
 
         </LinearLayout>
     </LinearLayout>

@@ -7,7 +7,10 @@ public class BasicRes {
     void add(int value){
         res+=value;
     }
-     int get(){
+    public int get(){
        return res;
+    }
+   public void set(int value){
+        res = value;
     }
 }

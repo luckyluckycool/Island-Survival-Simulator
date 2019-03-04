@@ -15,4 +15,10 @@ public class Stone extends BasicRes {
         res = stone;
         return super.get();
     }
+
+    @Override
+   public void set(int value) {
+        super.set(value);
+        stone = res;
+    }
 }

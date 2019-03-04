@@ -15,4 +15,10 @@ private int health = 100;
         res = health;
         return super.get();
     }
+
+    @Override
+   public void set(int value) {
+        super.set(value);
+        health =res;
+    }
 }

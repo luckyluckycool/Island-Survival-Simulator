@@ -134,7 +134,7 @@ public class PlayActivity extends AppCompatActivity {
     public void stamina_button_action(int value) {
         stamina.add(value);
 
-        if(health.get()<=0){
+        if(stamina.get()<=0){
             wood.set(0);
             stone.set(0);
             fiber.set(0);

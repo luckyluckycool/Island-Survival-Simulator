@@ -15,4 +15,10 @@ private int stamina = 100;
         res = stamina;
         return super.get();
     }
+
+    @Override
+   public void set(int value) {
+        super.set(value);
+        stamina = res;
+    }
 }

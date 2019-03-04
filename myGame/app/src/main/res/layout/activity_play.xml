@@ -6,6 +6,14 @@
     android:background="@drawable/mb_play"
     android:orientation="horizontal"
     tools:context=".PlayActivity">
+<ImageView
+    android:id="@+id/you_died"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    android:background="@drawable/you_died"
+
+    />
 
 
     <RelativeLayout
@@ -185,7 +193,13 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
-
+    <!--<android.gesture.GestureOverlayView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/gestures"
+        android:eventsInterceptionEnabled="false"
+        android:gestureStrokeType="single"
+        android:orientation="horizontal">-->
     <FrameLayout
         android:id="@+id/frame_for_action_buttons"
         android:layout_width="wrap_content"
@@ -193,6 +207,8 @@
         android:layout_centerHorizontal="true"
 
         android:layout_marginTop="200dp">
-
     </FrameLayout>
+<!--
+    </android.gesture.GestureOverlayView>
+-->
 </RelativeLayout>

@@ -18,4 +18,10 @@ public class Fiber extends BasicRes {
         res = fiber;
         return super.get();
     }
+
+    @Override
+   public void set(int value) {
+        super.set(value);
+        fiber = res;
+    }
 }

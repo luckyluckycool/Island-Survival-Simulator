@@ -134,7 +134,7 @@ public class PlayActivity extends AppCompatActivity {
     public void stamina_button_action(int value) {
         stamina.add(value);
 
-        if(stamina.get()<=0){
+        if (stamina.get() <= 0) {
             wood.set(0);
             stone.set(0);
             fiber.set(0);
@@ -158,52 +158,53 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public void eatFoodAction() {
-
+        if (!(food.get() <= 0)) {
         food.add(-1);
         list.set(foodIndex, food.get());
         food_text.setText(list.get(foodIndex).toString());
 
 
-        double chance = Math.random();
-        if (chance + 0.97 >= 1) {
+            double chance = Math.random();
+            if (chance + 0.97 >= 1) {
 
-            if (stamina.get()+10 > 100){
-                stamina.set(100);
+                if (stamina.get() + 10 > 100) {
+                    stamina.set(100);
 
-                list.set(staminaIndex, stamina.get());
-                stamina_text.setText(list.get(staminaIndex).toString());
-            }else {
-                stamina.add(10);
-                list.set(staminaIndex, stamina.get());
-                stamina_text.setText(list.get(staminaIndex).toString());
-            }
-            if (health.get() + 3 > 100) {
-                health.set(100);
-
-                list.set(healthIndex, health.get());
-                health_text.setText(list.get(healthIndex).toString());
-            } else {
-                health.add(3);
-                list.set(healthIndex, health.get());
-                health_text.setText(list.get(healthIndex).toString());
-            }
-        }else {
-            health.add(-5);
-            list.set(healthIndex, health.get());
-            health_text.setText(list.get(healthIndex).toString());
-
-
-            final Toast toast = Toast.makeText(this, "You eat rotten food", Toast.LENGTH_SHORT);
-            toast.show();
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    toast.cancel();
+                    list.set(staminaIndex, stamina.get());
+                    stamina_text.setText(list.get(staminaIndex).toString());
+                } else {
+                    stamina.add(10);
+                    list.set(staminaIndex, stamina.get());
+                    stamina_text.setText(list.get(staminaIndex).toString());
                 }
-            },1000);
+                if (health.get() + 3 > 100) {
+                    health.set(100);
+
+                    list.set(healthIndex, health.get());
+                    health_text.setText(list.get(healthIndex).toString());
+                } else {
+                    health.add(3);
+                    list.set(healthIndex, health.get());
+                    health_text.setText(list.get(healthIndex).toString());
+                }
+            } else {
+                health.add(-5);
+                list.set(healthIndex, health.get());
+                health_text.setText(list.get(healthIndex).toString());
+
+
+                final Toast toast = Toast.makeText(this, "You eat rotten food", Toast.LENGTH_SHORT);
+                toast.show();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        toast.cancel();
+                    }
+                }, 1000);
+
+            }
 
         }
-
     }
 }

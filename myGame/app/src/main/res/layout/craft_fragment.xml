@@ -22,7 +22,22 @@
                 android:layout_height="85dp"
                 android:background="@drawable/stone_axe_icon"
                 />
+            <ImageView
+                android:layout_marginStart="50dp"
 
+                android:id="@+id/craft_stone_pickaxe"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:background="@drawable/stone_pickaxe_icon"
+                />
+            <ImageView
+                android:layout_marginStart="50dp"
+
+                android:id="@+id/craft_stone_sickle"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:background="@drawable/stone_sickle_icon"
+                />
             <ImageView
                 android:id="@+id/back"
                 android:layout_marginStart="50dp"
@@ -50,7 +65,28 @@
                 android:textColor="#000"
                 android:textStyle="bold"/>
 
+            <TextView
+                android:layout_marginStart="50dp"
 
+                android:id="@+id/craft_stone_pickaxe_text"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:text="Stone pickaxe"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_marginStart="50dp"
+
+                android:id="@+id/craft_stone_sickle_text"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:text="Stone sickle"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:textStyle="bold"/>
 
             <TextView
                 android:layout_marginStart="50dp"

@@ -17,8 +17,8 @@ import luckycoolgames.mygame.Resources.types.Wood;
 
 public class AddButtonsFragment extends Fragment {
 
-   private ImageView gather_wood, gather_stone, gather_fiber, gather_food, back;
-   private TextView gatherWoodText,gatherStoneText,gatherFiberText, gatherFoodText;
+    private ImageView gather_wood, gather_stone, gather_fiber, gather_food, back;
+    private TextView gatherWoodText, gatherStoneText, gatherFiberText, gatherFoodText;
 
     public AddButtonsFragment() {
     }
@@ -30,9 +30,11 @@ public class AddButtonsFragment extends Fragment {
         gather_fiber = view.findViewById(R.id.gather_fiber_button);
         gather_food = view.findViewById(R.id.gather_food_button);
         gatherWoodText = view.findViewById(R.id.gather_wood_text);
+        gatherStoneText = view.findViewById(R.id.gather_stone_text);
+        gatherFiberText = view.findViewById(R.id.gather_fiber_text);
         back = view.findViewById(R.id.back);
 
-        switch (((PlayActivity)getActivity()).getWoodInstrumentLevel()){
+        switch (((PlayActivity) getActivity()).getWoodInstrumentLevel()) {
             case 0:
                 gather_wood.setBackgroundResource(R.drawable.hand_gathering);
                 gatherWoodText.setText("Gather sticks");
@@ -40,15 +42,35 @@ public class AddButtonsFragment extends Fragment {
             case 1:
                 gather_wood.setBackgroundResource(R.drawable.stone_axe_icon);
                 gatherWoodText.setText("Chop trees");
+                break;
         }
+        switch (((PlayActivity) getActivity()).getStoneInstrumentLevel()) {
 
-
+            case 0:
+                gather_stone.setBackgroundResource(R.drawable.hand_gathering);
+                gatherStoneText.setText("Gather stones");
+                break;
+            case 1:
+                gather_stone.setBackgroundResource(R.drawable.stone_pickaxe_icon);
+                gatherStoneText.setText("Pick stone with pickaxe");
+                break;
+        }
+        switch (((PlayActivity) getActivity()).getFiberInstrumentLevel()) {
+            case 0:
+                gather_fiber.setBackgroundResource(R.drawable.hand_gathering);
+                gatherFiberText.setText("Gather fiber");
+                break;
+            case 1:
+                gather_fiber.setBackgroundResource(R.drawable.stone_sickle_icon);
+                gatherFiberText.setText("Mow the grass");
+                break;
+        }
 
 
         gather_wood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (((PlayActivity)getActivity()).getWoodInstrumentLevel()) {
+                switch (((PlayActivity) getActivity()).getWoodInstrumentLevel()) {
                     case 0:
                         gather_sticks();
                         break;
@@ -61,21 +83,27 @@ public class AddButtonsFragment extends Fragment {
         gather_stone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                switch (((PlayActivity)getActivity()).getStoneInstrumentLevel()){
+                switch (((PlayActivity) getActivity()).getStoneInstrumentLevel()) {
                     case 0:
                         gather_rocks();
                         break;
-
+                    case 1:
+                        pickStonesWithStonePickaxe();
+                        break;
                 }
-
-
             }
         });
         gather_fiber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gather_grass();
+                switch (((PlayActivity) getActivity()).getFiberInstrumentLevel()) {
+                    case 0:
+                        gather_grass();
+                        break;
+                    case 1:
+                        mowGrassWithStoneSickle();
+                        break;
+                }
             }
         });
         gather_food.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +169,7 @@ public class AddButtonsFragment extends Fragment {
     }
 
     void gather_grass() {
-        ((PlayActivity) getActivity()).fiber_button_action(2);
+        ((PlayActivity) getActivity()).fiber_button_action(1);
         ((PlayActivity) getActivity()).stamina_button_action(-5);
 
         double chance = Math.random();
@@ -179,7 +207,7 @@ public class AddButtonsFragment extends Fragment {
         }
     }
 
-    void cutTreesByStoneAxe(){
+    void cutTreesByStoneAxe() {
         ((PlayActivity) getActivity()).wood_button_action(3);
         ((PlayActivity) getActivity()).stamina_button_action(-10);
 
@@ -199,7 +227,45 @@ public class AddButtonsFragment extends Fragment {
         }
     }
 
+    void pickStonesWithStonePickaxe() {
+        ((PlayActivity) getActivity()).stone_button_action(3);
+        ((PlayActivity) getActivity()).stamina_button_action(-10);
 
+        double chance = Math.random();
+        if (chance + 0.9 < 1) {
+            ((PlayActivity) getActivity()).health_button_action(-10);
+            final Toast toast = Toast.makeText(getContext().getApplicationContext(), "You hit your foot by your stone pickaxe =(", Toast.LENGTH_SHORT);
+            toast.show();
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    toast.cancel();
+                }
+            }, 1000);
+        }
+    }
+
+    void mowGrassWithStoneSickle() {
+        ((PlayActivity) getActivity()).fiber_button_action(3);
+        ((PlayActivity) getActivity()).stamina_button_action(-10);
+
+        double chance = Math.random();
+        if (chance + 0.9 < 1) {
+            ((PlayActivity) getActivity()).health_button_action(-10);
+            final Toast toast = Toast.makeText(getContext().getApplicationContext(), "You hit your foot by your stone sickle =(", Toast.LENGTH_SHORT);
+            toast.show();
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    toast.cancel();
+                }
+            }, 1000);
+        }
+    }
 }
 
 

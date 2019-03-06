@@ -59,6 +59,7 @@
             >
 
             <TextView
+                android:id="@+id/gather_wood_text"
                 android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:text="Gather sticks"
@@ -67,6 +68,7 @@
                 android:textColor="#000"
                 android:textStyle="bold"/>
             <TextView
+                android:id="@+id/gather_stone_text"
                 android:layout_marginStart="50dp"
                 android:layout_width="85dp"
                 android:layout_height="wrap_content"
@@ -76,6 +78,7 @@
                 android:textStyle="bold"
                 android:text="Gather stones"/>
             <TextView
+                android:id="@+id/gather_fiber_text"
                 android:layout_marginStart="50dp"
                 android:layout_width="85dp"
                 android:layout_height="wrap_content"
@@ -85,6 +88,7 @@
                 android:textStyle="bold"
                 android:text="Gather fiber"/>
             <TextView
+                android:id="@+id/gather_food_text"
                 android:layout_marginStart="50dp"
                 android:layout_width="85dp"
                 android:layout_height="wrap_content"

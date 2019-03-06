@@ -29,6 +29,13 @@ public class PlayActivity extends AppCompatActivity {
     private ImageView you_died;
     private Handler handler = new Handler();
 
+    private int n = 0;
+
+    private int stoneInstrumentLevel = 0;
+    private int woodInstrumentLevel = 0;
+    private int fiberInstrumentLevel = 0;
+
+
     //init exmpls of classes
     private final Wood wood = new Wood();
     private final Stone stone = new Stone();
@@ -51,7 +58,7 @@ public class PlayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
         ActionButtonFragment actionButtonFragment = new ActionButtonFragment();
-        fragmentManager.beginTransaction().add(R.id.frame_for_action_buttons, actionButtonFragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.frame_for_action_buttons, actionButtonFragment).commit();
         you_died = findViewById(R.id.you_died);
 
         //init textView
@@ -158,8 +165,10 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public void eatFoodAction() {
+
         if (!(food.get() <= 0)) {
         food.add(-1);
+        n++;
         list.set(foodIndex, food.get());
         food_text.setText(list.get(foodIndex).toString());
 
@@ -177,18 +186,21 @@ public class PlayActivity extends AppCompatActivity {
                     list.set(staminaIndex, stamina.get());
                     stamina_text.setText(list.get(staminaIndex).toString());
                 }
-                if (health.get() + 3 > 100) {
-                    health.set(100);
+                    if(n==5) {
+                        if (health.get() + 3 > 100) {
+                            health.set(100);
 
-                    list.set(healthIndex, health.get());
-                    health_text.setText(list.get(healthIndex).toString());
-                } else {
-                    health.add(3);
-                    list.set(healthIndex, health.get());
-                    health_text.setText(list.get(healthIndex).toString());
-                }
+                            list.set(healthIndex, health.get());
+                            health_text.setText(list.get(healthIndex).toString());
+                        } else {
+                            health.add(3);
+                            list.set(healthIndex, health.get());
+                            health_text.setText(list.get(healthIndex).toString());
+                        }
+                    }
             } else {
                 health.add(-5);
+                n=0;
                 list.set(healthIndex, health.get());
                 health_text.setText(list.get(healthIndex).toString());
 
@@ -206,5 +218,33 @@ public class PlayActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    public List<Integer> getList() {
+        return list;
+    }
+
+    public int getStoneInstrumentLevel() {
+        return stoneInstrumentLevel;
+    }
+
+    public void setStoneInstrumentLevel(int stoneInstrumentLevel) {
+        this.stoneInstrumentLevel = stoneInstrumentLevel;
+    }
+
+    public int getWoodInstrumentLevel() {
+        return woodInstrumentLevel;
+    }
+
+    public void setWoodInstrumentLevel(int woodInstrumentLevel) {
+        this.woodInstrumentLevel = woodInstrumentLevel;
+    }
+
+    public int getFiberInstrumentLevel() {
+        return fiberInstrumentLevel;
+    }
+
+    public void setFiberInstrumentLevel(int fiberInstrumentLevel) {
+        this.fiberInstrumentLevel = fiberInstrumentLevel;
     }
 }

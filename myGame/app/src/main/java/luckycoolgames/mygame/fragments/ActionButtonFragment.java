@@ -15,8 +15,9 @@ import luckycoolgames.mygame.R;
 
 public class ActionButtonFragment extends Fragment {
     private ImageView gather_button, craft_button, actionButton;
-    AddButtonsFragment addButtonsFragment = new AddButtonsFragment();
-    ActButtonsFragment actButtonsFragment = new ActButtonsFragment();
+    private AddButtonsFragment addButtonsFragment = new AddButtonsFragment();
+    private ActButtonsFragment actButtonsFragment = new ActButtonsFragment();
+    private CraftFragment craftFragment = new CraftFragment();
     public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.action_buttons_fragment, container, false);
         gather_button = view.findViewById(R.id.gather_button);
@@ -32,6 +33,12 @@ public class ActionButtonFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((PlayActivity)getActivity()).fragmentManager.beginTransaction().replace(R.id.frame_for_action_buttons, actButtonsFragment).commit();
+            }
+        });
+        craft_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((PlayActivity)getActivity()).fragmentManager.beginTransaction().replace(R.id.frame_for_action_buttons, craftFragment).commit();
             }
         });
         return view;

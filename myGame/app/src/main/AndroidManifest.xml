@@ -17,15 +17,21 @@
             android:name=".MainActivity"
             android:noHistory="true"
             android:screenOrientation="userLandscape">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:noHistory="true"
             android:name=".PlayActivity"
+            android:screenOrientation="userLandscape" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity
+            android:noHistory="true"
+            android:name=".AndroidGestureActivity"
             android:screenOrientation="userLandscape" />
     </application>
 

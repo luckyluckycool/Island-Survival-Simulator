@@ -1,4 +1,5 @@
 /*
+
 package luckycoolgames.mygame;
 
 import android.app.Activity;
@@ -43,4 +44,5 @@ public class AndroidGestureActivity extends Activity implements GestureOverlayVi
         }
     }
 }
+
 */

@@ -208,7 +208,7 @@
 
         android:layout_marginTop="200dp">
     </FrameLayout>
-<!--
-    </android.gesture.GestureOverlayView>
--->
+
+    <!--</android.gesture.GestureOverlayView>-->
+
 </RelativeLayout>

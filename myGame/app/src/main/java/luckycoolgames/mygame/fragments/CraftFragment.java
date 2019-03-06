@@ -1,0 +1,78 @@
+package luckycoolgames.mygame.fragments;
+
+import android.app.Fragment;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import luckycoolgames.mygame.PlayActivity;
+import luckycoolgames.mygame.R;
+
+
+public class CraftFragment extends Fragment {
+    private AddButtonsFragment addButtonsFragment = new AddButtonsFragment();
+    private ActButtonsFragment actButtonsFragment = new ActButtonsFragment();
+    private ImageView craftStoneAxe, back;
+    private TextView craftStoneAxeText;
+    //resource Indexes
+    private int woodIndex = 0;
+    private int stoneIndex = 1;
+    private int fiberIndex = 2;
+    private int foodIndex = 3;
+    private int healthIndex = 4;
+    private int staminaIndex = 5;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.craft_fragment, container, false);
+        craftStoneAxe = view.findViewById(R.id.craft_stone_axe);
+        back = view.findViewById(R.id.back);
+        craftStoneAxeText = view.findViewById(R.id.craft_stone_axe_text);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActionButtonFragment actionButtonFragment = new ActionButtonFragment();
+                ((PlayActivity) getActivity()).fragmentManager.beginTransaction().replace(R.id.frame_for_action_buttons, actionButtonFragment).commit();
+            }
+        });
+
+        craftStoneAxe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                double chance = Math.random();
+               if(((PlayActivity)getActivity()).getList().get(woodIndex)>=5&&((PlayActivity)getActivity()).getList().get(stoneIndex)>=3&&((PlayActivity)getActivity()).getList().get(fiberIndex)>=10&&((PlayActivity)getActivity()).getList().get(staminaIndex)>=20){
+                   ((PlayActivity)getActivity()).stamina_button_action(-20);
+                   if(chance+0.8>=1){
+                       craft(5,3,10,0,0,0);
+                       ((PlayActivity)getActivity()).setWoodInstrumentLevel(1);
+                       craftStoneAxe.setVisibility(View.GONE);
+                       craftStoneAxeText.setVisibility(View.GONE);
+                   }else {
+                       ((PlayActivity)getActivity()).health_button_action(-5);
+                       Toast.makeText(getContext(),"Stone fall on your foot", Toast.LENGTH_SHORT).show();
+                   }
+               } else {
+                   Toast.makeText(getContext(), "You need 5 woods, 3 stones, 10 fibers and 20 stamina", Toast.LENGTH_LONG).show();
+               }
+            }
+        });
+
+
+
+
+
+        return view;
+    }
+    void craft(int wood, int stone, int fiber, int food, int stamina, int health){
+        ((PlayActivity)getActivity()).wood_button_action(-wood);
+        ((PlayActivity)getActivity()).stone_button_action(-stone);
+        ((PlayActivity)getActivity()).fiber_button_action(-fiber);
+        ((PlayActivity)getActivity()).food_button_action(-food);
+        ((PlayActivity)getActivity()).stamina_button_action(stamina);
+        ((PlayActivity)getActivity()).health_button_action(health);
+    }
+}

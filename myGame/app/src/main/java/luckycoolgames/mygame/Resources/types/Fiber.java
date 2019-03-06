@@ -9,8 +9,19 @@ public class Fiber extends BasicRes {
    public void add(int value) {
         res = fiber;
         super.add(value);
+        fiber=res;
+
     }
-    public int getFiber() {
-        return fiber;
+
+    @Override
+   public int get() {
+        res = fiber;
+        return super.get();
+    }
+
+    @Override
+   public void set(int value) {
+        super.set(value);
+        fiber = res;
     }
 }

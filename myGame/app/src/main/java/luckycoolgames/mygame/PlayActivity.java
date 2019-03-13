@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
 
+import io.realm.Realm;
+import io.realm.RealmList;
 import luckycoolgames.mygame.Resources.types.Fiber;
 import luckycoolgames.mygame.Resources.types.Food;
 import luckycoolgames.mygame.Resources.types.Health;
@@ -24,13 +26,29 @@ import luckycoolgames.mygame.Resources.types.Wood;
 import luckycoolgames.mygame.fragments.ActionButtonFragment;
 
 public class PlayActivity extends AppCompatActivity {
+    //init textViews
     private TextView wood_text, stone_text, fiber_text, food_text, health_text, stamina_text;
+
+    //init FM
     public FragmentManager fragmentManager = getFragmentManager();
+
+    //init ImageView
     private ImageView you_died;
+
+    //init Handler
     private Handler handler = new Handler();
 
+    //init realm
+    private MyBook myBook = new MyBook();
+
+    //death Counter
+    private boolean death = false;
+
+
+    //eat counter
     private int n = 0;
 
+    //instrumentsLevels
     private int stoneInstrumentLevel = 0;
     private int woodInstrumentLevel = 0;
     private int fiberInstrumentLevel = 0;
@@ -43,7 +61,6 @@ public class PlayActivity extends AppCompatActivity {
     private final Food food = new Food();
     private final Health health = new Health();
     private final Stamina stamina = new Stamina();
-
     //resource Indexes
     private int woodIndex = 0;
     private int stoneIndex = 1;
@@ -53,12 +70,18 @@ public class PlayActivity extends AppCompatActivity {
     private int staminaIndex = 5;
     private List<Integer> list = new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
         ActionButtonFragment actionButtonFragment = new ActionButtonFragment();
         fragmentManager.beginTransaction().replace(R.id.frame_for_action_buttons, actionButtonFragment).commit();
+
+        Realm.init(getApplicationContext());
+        Realm realm = Realm.getDefaultInstance();
+
+        //init ImageView
         you_died = findViewById(R.id.you_died);
 
         //init textView
@@ -87,7 +110,23 @@ public class PlayActivity extends AppCompatActivity {
         health_text.setText(list.get(healthIndex).toString());
         stamina_text.setText(list.get(staminaIndex).toString());
 
+
+        setListToRealm(list);
     }
+
+    private int analyse(RealmList<Integer> realmList, List<Integer> list) {
+        if (realmList.isEmpty()) {
+            realmList.addAll(list);
+            return 0;
+        } else if (!realmList.equals(list)) {
+            realmList.clear();
+            realmList.addAll(list);
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
 
     //fast action for button
     public void wood_button_action(int value) {
@@ -117,12 +156,6 @@ public class PlayActivity extends AppCompatActivity {
     public void health_button_action(int value) {
         health.add(value);
         if (health.get() <= 0) {
-            wood.set(0);
-            stone.set(0);
-            fiber.set(0);
-            food.set(0);
-            stamina.set(100);
-            health.set(100);
             you_died.setVisibility(View.VISIBLE);
             you_died.bringToFront();
             handler.postDelayed(new Runnable() {
@@ -142,12 +175,7 @@ public class PlayActivity extends AppCompatActivity {
         stamina.add(value);
 
         if (stamina.get() <= 0) {
-            wood.set(0);
-            stone.set(0);
-            fiber.set(0);
-            food.set(0);
-            stamina.set(100);
-            health.set(100);
+            death = true;
             you_died.setVisibility(View.VISIBLE);
             you_died.bringToFront();
             handler.postDelayed(new Runnable() {
@@ -167,10 +195,10 @@ public class PlayActivity extends AppCompatActivity {
     public void eatFoodAction() {
 
         if (!(food.get() <= 0)) {
-        food.add(-1);
-        n++;
-        list.set(foodIndex, food.get());
-        food_text.setText(list.get(foodIndex).toString());
+            food.add(-1);
+            n++;
+            list.set(foodIndex, food.get());
+            food_text.setText(list.get(foodIndex).toString());
 
 
             double chance = Math.random();
@@ -186,21 +214,21 @@ public class PlayActivity extends AppCompatActivity {
                     list.set(staminaIndex, stamina.get());
                     stamina_text.setText(list.get(staminaIndex).toString());
                 }
-                    if(n==5) {
-                        if (health.get() + 3 > 100) {
-                            health.set(100);
+                if (n == 5) {
+                    if (health.get() + 3 > 100) {
+                        health.set(100);
 
-                            list.set(healthIndex, health.get());
-                            health_text.setText(list.get(healthIndex).toString());
-                        } else {
-                            health.add(3);
-                            list.set(healthIndex, health.get());
-                            health_text.setText(list.get(healthIndex).toString());
-                        }
+                        list.set(healthIndex, health.get());
+                        health_text.setText(list.get(healthIndex).toString());
+                    } else {
+                        health.add(3);
+                        list.set(healthIndex, health.get());
+                        health_text.setText(list.get(healthIndex).toString());
                     }
+                }
             } else {
                 health.add(-5);
-                n=0;
+                n = 0;
                 list.set(healthIndex, health.get());
                 health_text.setText(list.get(healthIndex).toString());
 
@@ -246,5 +274,20 @@ public class PlayActivity extends AppCompatActivity {
 
     public void setFiberInstrumentLevel(int fiberInstrumentLevel) {
         this.fiberInstrumentLevel = fiberInstrumentLevel;
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (!death) {
+            setListToRealm(list);
+        }
+        super.onDestroy();
+    }
+
+    public void setListToRealm(List<Integer> list){
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        myBook.setList(list);
+        realm.commitTransaction();
     }
 }

@@ -6,7 +6,8 @@ public class Stone extends BasicRes {
     @Override
    public void add(int value) {
         res = stone;
-        super.add(value);
+        if(!(res+value<0)) {
+            super.add(value);}
         stone = res;
     }
 

@@ -6,7 +6,8 @@ public class Wood extends BasicRes{
     @Override
    public void add(int value) {
         res = wood;
-        super.add(value);
+        if(!(res+value<0)) {
+            super.add(value);}
     wood = res;
     }
 

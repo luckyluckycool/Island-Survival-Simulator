@@ -8,7 +8,8 @@ public class Fiber extends BasicRes {
     @Override
    public void add(int value) {
         res = fiber;
-        super.add(value);
+        if(!(res+value<0)) {
+            super.add(value);}
         fiber = res;
     }
 

@@ -1,22 +1,20 @@
-/*package luckycoolgames.mygame;
+package luckycoolgames.mygame;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import io.realm.RealmList;
 import io.realm.RealmObject;
-import io.realm.annotations.Required;
 
-public class MyBook extends RealmObject {
+public class MyBook extends RealmObject{
 
-    @Required
-    private String title;
+  private RealmList<Integer> list = new RealmList<>();
 
-    public String getTitle() {
+  public RealmList<Integer> getList() {
+    return list;
+  }
 
-        return title;
-
-    }
-
-    public void setTitle(final String title) {
-
-        this.title = title;
-
-    }
-}*/
+  public void setList(List<Integer> arrayList) {
+    list.addAll(arrayList);
+  }
+}

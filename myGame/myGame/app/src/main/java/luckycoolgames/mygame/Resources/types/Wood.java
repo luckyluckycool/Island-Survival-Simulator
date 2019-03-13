@@ -1,0 +1,25 @@
+package luckycoolgames.mygame.Resources.types;
+
+public class Wood extends BasicRes{
+   private int wood=0;
+
+    @Override
+   public void add(int value) {
+        res = wood;
+        if(!(res+value<0)) {
+            super.add(value);}
+    wood = res;
+    }
+
+    @Override
+   public int get() {
+        res = wood;
+        return super.get();
+    }
+
+    @Override
+   public void set(int value) {
+        super.set(value);
+        wood= res;
+    }
+}

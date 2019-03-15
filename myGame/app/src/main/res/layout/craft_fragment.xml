@@ -38,12 +38,7 @@
                 android:layout_height="85dp"
                 android:background="@drawable/stone_sickle_icon"
                 />
-            <ImageView
-                android:id="@+id/back"
-                android:layout_marginStart="50dp"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:background="@drawable/hand_gathering" />
+
 
 
 
@@ -88,15 +83,6 @@
                 android:textColor="#000"
                 android:textStyle="bold"/>
 
-            <TextView
-                android:layout_marginStart="50dp"
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:text="Back"/>
 
         </LinearLayout>
     </LinearLayout>

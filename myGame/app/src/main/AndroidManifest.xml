@@ -3,6 +3,7 @@
     package="luckycoolgames.mygame">
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,24 +11,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoadingActivity"
-            android:noHistory="true"
-            android:screenOrientation="userLandscape" />
-        <activity
             android:name=".MainActivity"
             android:noHistory="true"
             android:screenOrientation="userLandscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:noHistory="true"
             android:name=".PlayActivity"
             android:screenOrientation="userLandscape" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
         <activity
             android:noHistory="true"

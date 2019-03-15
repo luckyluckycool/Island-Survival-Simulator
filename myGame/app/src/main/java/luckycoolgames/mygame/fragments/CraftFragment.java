@@ -14,9 +14,9 @@ import luckycoolgames.mygame.R;
 
 
 public class CraftFragment extends Fragment {
-    private AddButtonsFragment addButtonsFragment = new AddButtonsFragment();
-    private ActButtonsFragment actButtonsFragment = new ActButtonsFragment();
-    private ImageView craftStoneAxe, craftStonePickaxe, craftStoneSickle, back;
+    private GatherFragment addButtonsFragment = new GatherFragment();
+    private ActionFragment actionButtonsFragment = new ActionFragment();
+    private ImageView craftStoneAxe, craftStonePickaxe, craftStoneSickle;
     private TextView craftStoneAxeText, craftStonePickaxeText, craftStoneSickleText;
     //resource Indexes
     private int woodIndex = 0;
@@ -32,17 +32,10 @@ public class CraftFragment extends Fragment {
         craftStoneAxe = view.findViewById(R.id.craft_stone_axe);
         craftStonePickaxe = view.findViewById(R.id.craft_stone_pickaxe);
         craftStoneSickle = view.findViewById(R.id.craft_stone_sickle);
-        back = view.findViewById(R.id.back);
         craftStoneAxeText = view.findViewById(R.id.craft_stone_axe_text);
         craftStonePickaxeText = view.findViewById(R.id.craft_stone_pickaxe_text);
         craftStoneSickleText = view.findViewById(R.id.craft_stone_sickle_text);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ActionButtonFragment actionButtonFragment = new ActionButtonFragment();
-                ((PlayActivity) getActivity()).fragmentManager.beginTransaction().replace(R.id.frame_for_action_buttons, actionButtonFragment).commit();
-            }
-        });
+
 
         craftStoneAxe.setOnClickListener(new View.OnClickListener() {
             @Override

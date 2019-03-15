@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/mb_play"
     android:orientation="horizontal"
     tools:context=".PlayActivity">
@@ -205,10 +206,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="175dp"
+        />
+    <android.support.design.widget.BottomNavigationView
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_navigation_menu"
+        app:itemIconTint="@drawable/nav_item_color_state"
+        app:itemTextColor="@drawable/nav_item_color_state"
 
-        android:layout_marginTop="200dp">
-    </FrameLayout>
-
+        />
     <!--</android.gesture.GestureOverlayView>-->
 
 </RelativeLayout>

@@ -7,24 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import luckycoolgames.mygame.PlayActivity;
 import luckycoolgames.mygame.R;
-import luckycoolgames.mygame.Resources.types.Wood;
 
-public class AddButtonsFragment extends Fragment {
+public class GatherFragment extends Fragment {
 
     private ImageView gather_wood, gather_stone, gather_fiber, gather_food, back;
     private TextView gatherWoodText, gatherStoneText, gatherFiberText, gatherFoodText;
 
-    public AddButtonsFragment() {
-    }
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.add_buttons_fragment, container, false);
+        View view = inflater.inflate(R.layout.gather_fragment, container, false);
         gather_wood = view.findViewById(R.id.gather_wood_button);
         gather_stone = view.findViewById(R.id.gather_stone_button);
         gather_fiber = view.findViewById(R.id.gather_fiber_button);
@@ -32,7 +27,6 @@ public class AddButtonsFragment extends Fragment {
         gatherWoodText = view.findViewById(R.id.gather_wood_text);
         gatherStoneText = view.findViewById(R.id.gather_stone_text);
         gatherFiberText = view.findViewById(R.id.gather_fiber_text);
-        back = view.findViewById(R.id.back);
 
         switch (((PlayActivity) getActivity()).getWoodInstrumentLevel()) {
             case 0:
@@ -114,13 +108,6 @@ public class AddButtonsFragment extends Fragment {
         });
 
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ActionButtonFragment actionButtonFragment = new ActionButtonFragment();
-                ((PlayActivity) getActivity()).fragmentManager.beginTransaction().replace(R.id.frame_for_action_buttons, actionButtonFragment).commit();
-            }
-        });
 
 
         return view;

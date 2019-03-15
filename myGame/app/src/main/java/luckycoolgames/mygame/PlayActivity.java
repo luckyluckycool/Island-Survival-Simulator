@@ -1,31 +1,41 @@
 package luckycoolgames.mygame;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
 import io.realm.Realm;
 import io.realm.RealmList;
+import io.realm.RealmObject;
 import luckycoolgames.mygame.Resources.types.Fiber;
 import luckycoolgames.mygame.Resources.types.Food;
 import luckycoolgames.mygame.Resources.types.Health;
 import luckycoolgames.mygame.Resources.types.Stamina;
 import luckycoolgames.mygame.Resources.types.Stone;
 import luckycoolgames.mygame.Resources.types.Wood;
-import luckycoolgames.mygame.fragments.ActionButtonFragment;
+import luckycoolgames.mygame.fragments.ActionFragment;
+import luckycoolgames.mygame.fragments.GatherFragment;
+import luckycoolgames.mygame.fragments.CraftFragment;
 
-public class PlayActivity extends AppCompatActivity {
+public class PlayActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+
+    Realm realm = Realm.getDefaultInstance();
+
+    private BottomNavigationView bottomNavigationView;
+
     //init textViews
     private TextView wood_text, stone_text, fiber_text, food_text, health_text, stamina_text;
 
@@ -33,7 +43,7 @@ public class PlayActivity extends AppCompatActivity {
     public FragmentManager fragmentManager = getFragmentManager();
 
     //init ImageView
-    private ImageView you_died;
+    private ImageView youDied;
 
     //init Handler
     private Handler handler = new Handler();
@@ -52,8 +62,6 @@ public class PlayActivity extends AppCompatActivity {
     private int stoneInstrumentLevel = 0;
     private int woodInstrumentLevel = 0;
     private int fiberInstrumentLevel = 0;
-
-
     //init exmpls of classes
     private final Wood wood = new Wood();
     private final Stone stone = new Stone();
@@ -68,21 +76,28 @@ public class PlayActivity extends AppCompatActivity {
     private int foodIndex = 3;
     private int healthIndex = 4;
     private int staminaIndex = 5;
+    //init list
     private List<Integer> list = new ArrayList<>();
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
-        ActionButtonFragment actionButtonFragment = new ActionButtonFragment();
-        fragmentManager.beginTransaction().replace(R.id.frame_for_action_buttons, actionButtonFragment).commit();
+        myBook.fromRealm();
 
-        Realm.init(getApplicationContext());
-        Realm realm = Realm.getDefaultInstance();
+        if(realmIsEmpty()==true){
+            newGameSetList();
+        }else {
+            list = myBook.getList();
+        }
 
-        //init ImageView
-        you_died = findViewById(R.id.you_died);
+        loadFragment(new GatherFragment());
+        youDied = findViewById(R.id.you_died);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+
 
         //init textView
         wood_text = findViewById(R.id.wood_text);
@@ -92,14 +107,13 @@ public class PlayActivity extends AppCompatActivity {
         health_text = findViewById(R.id.health_text);
         stamina_text = findViewById(R.id.stamina_text);
 
-
         //first list_add
-        list.add(woodIndex, wood.get());
-        list.add(stoneIndex, stone.get());
-        list.add(fiberIndex, fiber.get());
-        list.add(foodIndex, food.get());
-        list.add(healthIndex, health.get());
-        list.add(staminaIndex, stamina.get());
+        /*if(*//*realmIsEmpty()*//*){
+
+        }else{
+            getListFromRealm();
+        }*/
+        newGameSetList();
 
 
         //first set text
@@ -111,20 +125,7 @@ public class PlayActivity extends AppCompatActivity {
         stamina_text.setText(list.get(staminaIndex).toString());
 
 
-        setListToRealm(list);
-    }
-
-    private int analyse(RealmList<Integer> realmList, List<Integer> list) {
-        if (realmList.isEmpty()) {
-            realmList.addAll(list);
-            return 0;
-        } else if (!realmList.equals(list)) {
-            realmList.clear();
-            realmList.addAll(list);
-            return 1;
-        } else {
-            return 2;
-        }
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
 
 
@@ -156,8 +157,8 @@ public class PlayActivity extends AppCompatActivity {
     public void health_button_action(int value) {
         health.add(value);
         if (health.get() <= 0) {
-            you_died.setVisibility(View.VISIBLE);
-            you_died.bringToFront();
+            youDied.setVisibility(View.VISIBLE);
+            youDied.bringToFront();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -176,8 +177,8 @@ public class PlayActivity extends AppCompatActivity {
 
         if (stamina.get() <= 0) {
             death = true;
-            you_died.setVisibility(View.VISIBLE);
-            you_died.bringToFront();
+            youDied.setVisibility(View.VISIBLE);
+            youDied.bringToFront();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -252,6 +253,10 @@ public class PlayActivity extends AppCompatActivity {
         return list;
     }
 
+    public void setList(List<Integer> list) {
+        this.list = list;
+    }
+
     public int getStoneInstrumentLevel() {
         return stoneInstrumentLevel;
     }
@@ -278,16 +283,101 @@ public class PlayActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        if (!death) {
-            setListToRealm(list);
-        }
+        myBook.toRealm(list);
+        realm.close();
         super.onDestroy();
     }
 
-    public void setListToRealm(List<Integer> list){
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
+    private void newGameSetList() {
+        list.add(woodIndex, wood.get());
+        list.add(stoneIndex, stone.get());
+        list.add(fiberIndex, fiber.get());
+        list.add(foodIndex, food.get());
+        list.add(healthIndex, health.get());
+        list.add(staminaIndex, stamina.get());
+    }
+
+    /*public void setListToRealm(){
+        .beginTransaction();
+        MyBook myBook = realm.createObject(MyBook.class);
         myBook.setList(list);
         realm.commitTransaction();
+    }*/
+
+    private void getListFromRealm() {
+        realm.beginTransaction();
+        MyBook myBook = realm.createObject(MyBook.class);
+        list.addAll(realm.copyFromRealm(myBook).getList());
+        realm.commitTransaction();
     }
+
+
+
+
+    private boolean realmIsEmpty(){
+        List<Integer> list = myBook.fromRealm();
+        if(list.isEmpty()){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    //bottom_navigation_methodes
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment fragment = null;
+
+        switch (item.getItemId()) {
+            case R.id.gather_button:
+                fragment = new GatherFragment();
+                break;
+            case R.id.craft_button:
+                fragment = new CraftFragment();
+                break;
+            case R.id.action_button:
+                fragment = new ActionFragment();
+        }
+        return loadFragment(fragment);
+    }
+
+    private boolean loadFragment(Fragment fragment) {
+        if (fragment != null) {
+            fragmentManager.beginTransaction().replace(R.id.frame_for_action_buttons, fragment).commit();
+            return true;
+        }
+        return false;
+    }
+
+
+
+
+
+    private class MyBook extends RealmObject{
+        private RealmList<Integer> list = new RealmList<>();
+
+        public RealmList<Integer> getList() {
+            return list;
+        }
+
+        public void setList(List<Integer> arrayList) {
+            list.addAll(arrayList);
+        }
+
+
+        public void toRealm(List<Integer> list){
+            myBook.setList(list);
+            realm.beginTransaction();
+            realm.copyToRealmOrUpdate(myBook);
+            realm.commitTransaction();
+        }
+        public List<Integer> fromRealm(){
+            realm.beginTransaction();
+            myBook = realm.copyFromRealm(myBook);
+            realm.commitTransaction();
+            return myBook.getList();
+        }
+
+    }
+
 }

@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
 
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/mb_main">
-<LinearLayout
-    android:layout_gravity="center_vertical"
+
+    <FrameLayout
+        android:id="@+id/frame_for_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+
+        />
+
+    <LinearLayout
+    android:layout_centerVertical="true"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -25,12 +34,12 @@
         android:id="@+id/continue_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:fontFamily="@font/skulls"
         android:gravity="center_horizontal"
         android:text="Continue"
         android:textColor="#FF0"
-        android:textSize="115dp" />
+        android:textSize="115dp"
+        />
 
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

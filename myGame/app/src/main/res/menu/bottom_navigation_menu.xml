@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/gather_button"
+    android:enabled="true"
+    android:title="GATHER"
+    android:icon="@drawable/ic_add"
+    />
+    <item
+        android:id="@+id/craft_button"
+        android:enabled="true"
+        android:title="CRAFT"
+        android:icon="@drawable/ic_add"
+        />
+    <item
+        android:id="@+id/action_button"
+        android:enabled="true"
+        android:title="ACTION"
+        android:icon="@drawable/ic_add"
+        />
+    <!--<item
+        android:id="@+id/storage_button"
+        android:enabled="true"
+        android:title="STORAGE"
+        android:icon="@drawable/ic_add"
+        android:visible="true"
+        />-->
+
+</menu>

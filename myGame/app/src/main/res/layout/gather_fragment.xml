@@ -44,12 +44,7 @@
                 android:layout_width="85dp"
                 android:layout_height="85dp"
                 android:background="@drawable/hand_gathering" />
-            <ImageView
-                android:id="@+id/back"
-                android:layout_marginStart="50dp"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:background="@drawable/hand_gathering" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -97,15 +92,7 @@
                 android:textColor="#000"
                 android:textStyle="bold"
                 android:text="Gather food"/>
-            <TextView
-                android:layout_marginStart="50dp"
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:text="Back"/>
+
 
         </LinearLayout>
     </LinearLayout>

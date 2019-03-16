@@ -20,6 +20,8 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.RealmResults;
+import io.realm.annotations.RealmClass;
 import luckycoolgames.mygame.Resources.types.Fiber;
 import luckycoolgames.mygame.Resources.types.Food;
 import luckycoolgames.mygame.Resources.types.Health;
@@ -32,7 +34,7 @@ import luckycoolgames.mygame.fragments.CraftFragment;
 
 public class PlayActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    Realm realm = Realm.getDefaultInstance();
+    Realm realm;
 
     private BottomNavigationView bottomNavigationView;
 
@@ -47,9 +49,6 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
 
     //init Handler
     private Handler handler = new Handler();
-
-    //init realm
-    private MyBook myBook = new MyBook();
 
     //death Counter
     private boolean death = false;
@@ -80,24 +79,28 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
     private List<Integer> list = new ArrayList<>();
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
-        myBook.fromRealm();
+        realm = Realm.getDefaultInstance();
 
-        if(realmIsEmpty()==true){
-            newGameSetList();
-        }else {
-            list = myBook.getList();
-        }
 
         loadFragment(new GatherFragment());
         youDied = findViewById(R.id.you_died);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-
+        /*handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (realmIsEmpty() == true) {
+                    newGameSetList();
+                } else {
+                    list = fromRealm();
+                }
+            }
+        },0);*/
+        newGameSetList();
 
         //init textView
         wood_text = findViewById(R.id.wood_text);
@@ -283,9 +286,10 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     protected void onDestroy() {
-        myBook.toRealm(list);
-        realm.close();
+        toRealm(list);
+
         super.onDestroy();
+        realm.close();
     }
 
     private void newGameSetList() {
@@ -297,31 +301,6 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
         list.add(staminaIndex, stamina.get());
     }
 
-    /*public void setListToRealm(){
-        .beginTransaction();
-        MyBook myBook = realm.createObject(MyBook.class);
-        myBook.setList(list);
-        realm.commitTransaction();
-    }*/
-
-    private void getListFromRealm() {
-        realm.beginTransaction();
-        MyBook myBook = realm.createObject(MyBook.class);
-        list.addAll(realm.copyFromRealm(myBook).getList());
-        realm.commitTransaction();
-    }
-
-
-
-
-    private boolean realmIsEmpty(){
-        List<Integer> list = myBook.fromRealm();
-        if(list.isEmpty()){
-            return true;
-        }else {
-            return false;
-        }
-    }
 
     //bottom_navigation_methodes
     @Override
@@ -350,34 +329,39 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
     }
 
 
+    public void toRealm(final List<Integer> list) {
 
+                realm.beginTransaction();
+                MyBook myBook = realm.createObject(MyBook.class);
+                myBook.setList(list);
+                realm.commitTransaction();
+    }
 
-
-    private class MyBook extends RealmObject{
-        private RealmList<Integer> list = new RealmList<>();
-
-        public RealmList<Integer> getList() {
+    public List<Integer> fromRealm() {
+        List<Integer> list = new ArrayList<>();
+        realm.beginTransaction();
+        MyBook myBook = realm.where(MyBook.class).findFirst();
+        if(!myBook.getList().isEmpty()) {
+            list.addAll(myBook.getList());
+            realm.commitTransaction();
             return list;
-        }
+        }else {
 
-        public void setList(List<Integer> arrayList) {
-            list.addAll(arrayList);
-        }
-
-
-        public void toRealm(List<Integer> list){
-            myBook.setList(list);
-            realm.beginTransaction();
-            realm.copyToRealmOrUpdate(myBook);
-            realm.commitTransaction();
-        }
-        public List<Integer> fromRealm(){
-            realm.beginTransaction();
-            myBook = realm.copyFromRealm(myBook);
-            realm.commitTransaction();
-            return myBook.getList();
+            realm.cancelTransaction();
+            return null;
         }
 
     }
+
+    /*public boolean realmIsEmpty() {
+        realm.beginTransaction();
+        MyBook myBook = realm.where(MyBook.class).findFirst();
+        realm.commitTransaction();
+        if (myBook.getList().isEmpty())
+            return true;
+        else
+            return false;
+    }*/
+
 
 }

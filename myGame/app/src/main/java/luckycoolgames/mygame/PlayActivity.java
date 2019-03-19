@@ -34,7 +34,9 @@ import luckycoolgames.mygame.fragments.CraftFragment;
 
 public class PlayActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    Realm realm;
+    private MyBook myBook;
+
+    public Realm realm;
 
     private BottomNavigationView bottomNavigationView;
 
@@ -57,17 +59,11 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
     //eat counter
     private int n = 0;
 
+
     //instrumentsLevels
     private int stoneInstrumentLevel = 0;
     private int woodInstrumentLevel = 0;
     private int fiberInstrumentLevel = 0;
-    //init exmpls of classes
-    private final Wood wood = new Wood();
-    private final Stone stone = new Stone();
-    private final Fiber fiber = new Fiber();
-    private final Food food = new Food();
-    private final Health health = new Health();
-    private final Stamina stamina = new Stamina();
     //resource Indexes
     private int woodIndex = 0;
     private int stoneIndex = 1;
@@ -75,6 +71,11 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
     private int foodIndex = 3;
     private int healthIndex = 4;
     private int staminaIndex = 5;
+    private int woodInstrumentIndex = 6;
+    private int stoneInstrumentIndex = 7;
+    private int fiberInstrumentIndex = 8;
+    private int foodInstrumentIndex = 9;
+
     //init list
     private List<Integer> list = new ArrayList<>();
 
@@ -83,24 +84,6 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
-        realm = Realm.getDefaultInstance();
-
-
-        loadFragment(new GatherFragment());
-        youDied = findViewById(R.id.you_died);
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
-
-        /*handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (realmIsEmpty() == true) {
-                    newGameSetList();
-                } else {
-                    list = fromRealm();
-                }
-            }
-        },0);*/
-        newGameSetList();
 
         //init textView
         wood_text = findViewById(R.id.wood_text);
@@ -110,56 +93,47 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
         health_text = findViewById(R.id.health_text);
         stamina_text = findViewById(R.id.stamina_text);
 
-        //first list_add
-        /*if(*//*realmIsEmpty()*//*){
+        youDied = findViewById(R.id.you_died);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        }else{
-            getListFromRealm();
-        }*/
-        newGameSetList();
+        realm = Realm.getDefaultInstance();
 
+        list = fromRealm();
+        if(list.isEmpty()){
+            newGameSetList();
+        }
+        setTextsFromList();
 
-        //first set text
-        wood_text.setText(list.get(woodIndex).toString());
-        stone_text.setText(list.get(stoneIndex).toString());
-        food_text.setText(list.get(fiberIndex).toString());
-        fiber_text.setText(list.get(fiberIndex).toString());
-        health_text.setText(list.get(healthIndex).toString());
-        stamina_text.setText(list.get(staminaIndex).toString());
-
+        loadFragment(new GatherFragment());
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
 
 
     //fast action for button
-    public void wood_button_action(int value) {
-        wood.add(value);
-        list.set(woodIndex, wood.get());
+    public void woodAdd(int value) {
+        list.set(woodIndex, list.get(woodIndex) + value);
         wood_text.setText(list.get(woodIndex).toString());
     }
 
-    public void stone_button_action(int value) {
-        stone.add(value);
-        list.set(stoneIndex, stone.get());
+    public void stoneAdd(int value) {
+        list.set(stoneIndex, list.get(stoneIndex) + value);
         stone_text.setText(list.get(stoneIndex).toString());
     }
 
-    public void food_button_action(int value) {
-        food.add(value);
-        list.set(foodIndex, food.get());
+    public void foodAdd(int value) {
+        list.set(foodIndex, list.get(foodIndex) + value);
         food_text.setText(list.get(foodIndex).toString());
     }
 
-    public void fiber_button_action(int value) {
-        fiber.add(value);
-        list.set(fiberIndex, fiber.get());
+    public void fiberAdd(int value) {
+        list.set(fiberIndex, list.get(fiberIndex) + value);
         fiber_text.setText(list.get(fiberIndex).toString());
     }
 
-    public void health_button_action(int value) {
-        health.add(value);
-        if (health.get() <= 0) {
+    public void healthAdd(int value) {
+
+        if (list.get(healthIndex) + value <= 0) {
             youDied.setVisibility(View.VISIBLE);
             youDied.bringToFront();
             handler.postDelayed(new Runnable() {
@@ -170,15 +144,18 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
                 }
             }, 5000);
 
+        } else {
+            if (list.get(healthIndex) + value > 100)
+                list.set(healthIndex, 100);
+            else
+                list.set(healthIndex, list.get(healthIndex) + value);
+            health_text.setText(list.get(healthIndex).toString());
         }
-        list.set(healthIndex, health.get());
-        health_text.setText(list.get(healthIndex).toString());
     }
 
-    public void stamina_button_action(int value) {
-        stamina.add(value);
+    public void staminaAdd(int value) {
 
-        if (stamina.get() <= 0) {
+        if (list.get(staminaIndex) + value <= 0) {
             death = true;
             youDied.setVisibility(View.VISIBLE);
             youDied.bringToFront();
@@ -190,52 +167,32 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
                 }
             }, 5000);
 
+        } else {
+            if (list.get(staminaIndex) + value > 100)
+                list.set(staminaIndex, 100);
+            else
+                list.set(staminaIndex, list.get(staminaIndex) + value);
+            stamina_text.setText(list.get(staminaIndex).toString());
         }
-
-        list.set(staminaIndex, stamina.get());
-        stamina_text.setText(list.get(staminaIndex).toString());
     }
 
     public void eatFoodAction() {
 
-        if (!(food.get() <= 0)) {
-            food.add(-1);
+        if (!(list.get(foodIndex) <= 0)) {
+            foodAdd(-1);
             n++;
-            list.set(foodIndex, food.get());
-            food_text.setText(list.get(foodIndex).toString());
-
 
             double chance = Math.random();
             if (chance + 0.97 >= 1) {
 
-                if (stamina.get() + 10 > 100) {
-                    stamina.set(100);
-
-                    list.set(staminaIndex, stamina.get());
-                    stamina_text.setText(list.get(staminaIndex).toString());
-                } else {
-                    stamina.add(10);
-                    list.set(staminaIndex, stamina.get());
-                    stamina_text.setText(list.get(staminaIndex).toString());
-                }
+                staminaAdd(10);
                 if (n == 5) {
-                    if (health.get() + 3 > 100) {
-                        health.set(100);
-
-                        list.set(healthIndex, health.get());
-                        health_text.setText(list.get(healthIndex).toString());
-                    } else {
-                        health.add(3);
-                        list.set(healthIndex, health.get());
-                        health_text.setText(list.get(healthIndex).toString());
-                    }
+                    healthAdd(3);
                 }
-            } else {
-                health.add(-5);
-                n = 0;
-                list.set(healthIndex, health.get());
-                health_text.setText(list.get(healthIndex).toString());
 
+            } else {
+                healthAdd(-5);
+                n = 0;
 
                 final Toast toast = Toast.makeText(this, "You eat rotten food", Toast.LENGTH_SHORT);
                 toast.show();
@@ -260,45 +217,25 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
         this.list = list;
     }
 
-    public int getStoneInstrumentLevel() {
-        return stoneInstrumentLevel;
-    }
-
-    public void setStoneInstrumentLevel(int stoneInstrumentLevel) {
-        this.stoneInstrumentLevel = stoneInstrumentLevel;
-    }
-
-    public int getWoodInstrumentLevel() {
-        return woodInstrumentLevel;
-    }
-
-    public void setWoodInstrumentLevel(int woodInstrumentLevel) {
-        this.woodInstrumentLevel = woodInstrumentLevel;
-    }
-
-    public int getFiberInstrumentLevel() {
-        return fiberInstrumentLevel;
-    }
-
-    public void setFiberInstrumentLevel(int fiberInstrumentLevel) {
-        this.fiberInstrumentLevel = fiberInstrumentLevel;
-    }
-
     @Override
     protected void onDestroy() {
-        toRealm(list);
 
         super.onDestroy();
+        toRealm(list);
         realm.close();
     }
 
     private void newGameSetList() {
-        list.add(woodIndex, wood.get());
-        list.add(stoneIndex, stone.get());
-        list.add(fiberIndex, fiber.get());
-        list.add(foodIndex, food.get());
-        list.add(healthIndex, health.get());
-        list.add(staminaIndex, stamina.get());
+        list.add(woodIndex, 0);
+        list.add(stoneIndex, 0);
+        list.add(fiberIndex, 0);
+        list.add(foodIndex, 0);
+        list.add(healthIndex, 100);
+        list.add(staminaIndex, 100);
+        list.add(woodInstrumentIndex, 0);
+        list.add(stoneInstrumentIndex, 0);
+        list.add(fiberInstrumentIndex, 0);
+        list.add(foodInstrumentIndex, 0);
     }
 
 
@@ -329,39 +266,50 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
     }
 
 
-    public void toRealm(final List<Integer> list) {
+    public void toRealm( List<Integer> list) {
+        realm.beginTransaction();
+        if(realm.isEmpty()){
+            myBook = realm.createObject(MyBook.class);
+            myBook.setList(list);}
+        else{
+            realm.insertOrUpdate(myBook) ;
+            myBook.setList(list);
+        }
 
-                realm.beginTransaction();
-                MyBook myBook = realm.createObject(MyBook.class);
-                myBook.setList(list);
-                realm.commitTransaction();
+        realm.commitTransaction();
     }
 
     public List<Integer> fromRealm() {
         List<Integer> list = new ArrayList<>();
-        realm.beginTransaction();
         MyBook myBook = realm.where(MyBook.class).findFirst();
-        if(!myBook.getList().isEmpty()) {
+        //поміняв
+        realm.beginTransaction();
+
+        if (!realm.isEmpty()) {
             list.addAll(myBook.getList());
             realm.commitTransaction();
-            return list;
-        }else {
-
+        } else
             realm.cancelTransaction();
-            return null;
-        }
+        return list;
 
     }
 
-    /*public boolean realmIsEmpty() {
-        realm.beginTransaction();
+    public boolean realmIsEmpty() {
         MyBook myBook = realm.where(MyBook.class).findFirst();
-        realm.commitTransaction();
+        realm.beginTransaction();
         if (myBook.getList().isEmpty())
             return true;
         else
             return false;
-    }*/
 
+    }
+    private void setTextsFromList(){
+        wood_text.setText(list.get(woodIndex).toString());
+        stone_text.setText(list.get(stoneIndex).toString());
+        fiber_text.setText(list.get(fiberIndex).toString());
+        food_text.setText(list.get(foodIndex).toString());
+        stamina_text.setText(list.get(staminaIndex).toString());
+        health_text.setText(list.get(healthIndex).toString());
+    }
 
 }

@@ -14,59 +14,81 @@ import luckycoolgames.mygame.PlayActivity;
 import luckycoolgames.mygame.R;
 
 public class GatherFragment extends Fragment {
+    private int woodIndex = 0;
+    private int stoneIndex = 1;
+    private int fiberIndex = 2;
+    private int foodIndex = 3;
+    private int healthIndex = 4;
+    private int staminaIndex = 5;
+    private int woodInstrumentIndex = 6;
+    private int stoneInstrumentIndex = 7;
+    private int fiberInstrumentIndex = 8;
+    private int foodInstrumentIndex = 9;
 
-    private ImageView gather_wood, gather_stone, gather_fiber, gather_food, back;
+    private ImageView gatherWood, gatherStone, gatherFiber, gatherFood;
     private TextView gatherWoodText, gatherStoneText, gatherFiberText, gatherFoodText;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.gather_fragment, container, false);
-        gather_wood = view.findViewById(R.id.gather_wood_button);
-        gather_stone = view.findViewById(R.id.gather_stone_button);
-        gather_fiber = view.findViewById(R.id.gather_fiber_button);
-        gather_food = view.findViewById(R.id.gather_food_button);
+        gatherWood = view.findViewById(R.id.gather_wood_button);
+        gatherStone = view.findViewById(R.id.gather_stone_button);
+        gatherFiber = view.findViewById(R.id.gather_fiber_button);
+        gatherFood = view.findViewById(R.id.gather_food_button);
         gatherWoodText = view.findViewById(R.id.gather_wood_text);
         gatherStoneText = view.findViewById(R.id.gather_stone_text);
         gatherFiberText = view.findViewById(R.id.gather_fiber_text);
+        gatherFoodText = view.findViewById(R.id.gather_food_text);
 
-        switch (((PlayActivity) getActivity()).getWoodInstrumentLevel()) {
+        switch (((PlayActivity) getActivity()).getList().get(woodInstrumentIndex)) {
             case 0:
-                gather_wood.setBackgroundResource(R.drawable.hand_gathering);
+                gatherWood.setBackgroundResource(R.drawable.hand_gathering);
                 gatherWoodText.setText("Gather sticks");
                 break;
             case 1:
-                gather_wood.setBackgroundResource(R.drawable.stone_axe_icon);
+                gatherWood.setBackgroundResource(R.drawable.stone_axe_icon);
                 gatherWoodText.setText("Chop trees");
                 break;
         }
-        switch (((PlayActivity) getActivity()).getStoneInstrumentLevel()) {
+
+        switch (((PlayActivity) getActivity()).getList().get(stoneInstrumentIndex)) {
 
             case 0:
-                gather_stone.setBackgroundResource(R.drawable.hand_gathering);
+                gatherStone.setBackgroundResource(R.drawable.hand_gathering);
                 gatherStoneText.setText("Gather stones");
                 break;
             case 1:
-                gather_stone.setBackgroundResource(R.drawable.stone_pickaxe_icon);
+                gatherStone.setBackgroundResource(R.drawable.stone_pickaxe_icon);
                 gatherStoneText.setText("Pick stone with pickaxe");
                 break;
         }
-        switch (((PlayActivity) getActivity()).getFiberInstrumentLevel()) {
+        switch (((PlayActivity) getActivity()).getList().get(fiberInstrumentIndex)) {
             case 0:
-                gather_fiber.setBackgroundResource(R.drawable.hand_gathering);
+                gatherFiber.setBackgroundResource(R.drawable.hand_gathering);
                 gatherFiberText.setText("Gather fiber");
                 break;
             case 1:
-                gather_fiber.setBackgroundResource(R.drawable.stone_sickle_icon);
+                gatherFiber.setBackgroundResource(R.drawable.stone_sickle_icon);
                 gatherFiberText.setText("Mow the grass");
                 break;
         }
+        switch (((PlayActivity) getActivity()).getList().get(foodInstrumentIndex)) {
+            case 0:
+                gatherFood.setBackgroundResource(R.drawable.hand_gathering);
+                gatherFoodText.setText("Gather berries");
+                break;
+            case 1:
+                gatherFood.setBackgroundResource(R.drawable.basket_icon);
+                gatherFoodText.setText("Gather in basket");
+                break;
 
+        }
 
-        gather_wood.setOnClickListener(new View.OnClickListener() {
+        gatherWood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (((PlayActivity) getActivity()).getWoodInstrumentLevel()) {
+                switch (((PlayActivity) getActivity()).getList().get(woodInstrumentIndex)) {
                     case 0:
-                        gather_sticks();
+                        gatherSticks();
                         break;
                     case 1:
                         cutTreesByStoneAxe();
@@ -74,12 +96,13 @@ public class GatherFragment extends Fragment {
                 }
             }
         });
-        gather_stone.setOnClickListener(new View.OnClickListener() {
+
+        gatherStone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (((PlayActivity) getActivity()).getStoneInstrumentLevel()) {
+                switch (((PlayActivity) getActivity()).getList().get(stoneInstrumentIndex)) {
                     case 0:
-                        gather_rocks();
+                        gatherRocks();
                         break;
                     case 1:
                         pickStonesWithStonePickaxe();
@@ -87,12 +110,13 @@ public class GatherFragment extends Fragment {
                 }
             }
         });
-        gather_fiber.setOnClickListener(new View.OnClickListener() {
+
+        gatherFiber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (((PlayActivity) getActivity()).getFiberInstrumentLevel()) {
+                switch (((PlayActivity) getActivity()).getList().get(fiberInstrumentIndex)) {
                     case 0:
-                        gather_grass();
+                        gatherGrass();
                         break;
                     case 1:
                         mowGrassWithStoneSickle();
@@ -100,27 +124,35 @@ public class GatherFragment extends Fragment {
                 }
             }
         });
-        gather_food.setOnClickListener(new View.OnClickListener() {
+
+        gatherFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gather_berries();
+                switch (((PlayActivity) getActivity()).getList().get(foodInstrumentIndex)) {
+                    case 0:
+                        gatherBerries();
+                        break;
+                    case 1:
+                        gatherBerriesInBasket();
+                        break;
+                }
+
             }
         });
-
-
 
 
         return view;
     }
 
-    void gather_sticks() {
+    //Zero Instrument Level
+    void gatherSticks() {
 
-        ((PlayActivity) getActivity()).wood_button_action(1);
-        ((PlayActivity) getActivity()).stamina_button_action(-5);
+        ((PlayActivity) getActivity()).woodAdd(1);
+        ((PlayActivity) getActivity()).staminaAdd(-5);
 
         double chance = Math.random();
         if (chance + 0.97 < 1) {
-            ((PlayActivity) getActivity()).health_button_action(-3);
+            ((PlayActivity) getActivity()).healthAdd(-3);
             final Toast toast = Toast.makeText(getContext().getApplicationContext(), "You ran a splinter in your finger =(", Toast.LENGTH_SHORT);
             toast.show();
 
@@ -135,13 +167,13 @@ public class GatherFragment extends Fragment {
 
     }
 
-    void gather_rocks() {
-        ((PlayActivity) getActivity()).stone_button_action(1);
-        ((PlayActivity) getActivity()).stamina_button_action(-5);
+    void gatherRocks() {
+        ((PlayActivity) getActivity()).stoneAdd(1);
+        ((PlayActivity) getActivity()).staminaAdd(-5);
 
         double chance = Math.random();
         if (chance + 0.97 < 1) {
-            ((PlayActivity) getActivity()).health_button_action(-3);
+            ((PlayActivity) getActivity()).healthAdd(-3);
             final Toast toast = Toast.makeText(getContext().getApplicationContext(), "You hit your foot finger by hided stone =(", Toast.LENGTH_SHORT);
             toast.show();
 
@@ -155,13 +187,13 @@ public class GatherFragment extends Fragment {
         }
     }
 
-    void gather_grass() {
-        ((PlayActivity) getActivity()).fiber_button_action(1);
-        ((PlayActivity) getActivity()).stamina_button_action(-5);
+    void gatherGrass() {
+        ((PlayActivity) getActivity()).fiberAdd(1);
+        ((PlayActivity) getActivity()).staminaAdd(-5);
 
         double chance = Math.random();
         if (chance + 0.97 < 1) {
-            ((PlayActivity) getActivity()).health_button_action(-3);
+            ((PlayActivity) getActivity()).healthAdd(-3);
             final Toast toast = Toast.makeText(getContext().getApplicationContext(), "You slip and fall on the wet grass =(", Toast.LENGTH_SHORT);
             toast.show();
 
@@ -175,13 +207,13 @@ public class GatherFragment extends Fragment {
         }
     }
 
-    void gather_berries() {
-        ((PlayActivity) getActivity()).food_button_action(1);
-        ((PlayActivity) getActivity()).stamina_button_action(-5);
+    void gatherBerries() {
+        ((PlayActivity) getActivity()).foodAdd(1);
+        ((PlayActivity) getActivity()).staminaAdd(-10);
 
         double chance = Math.random();
         if (chance + 0.97 < 1) {
-            ((PlayActivity) getActivity()).health_button_action(-3);
+            ((PlayActivity) getActivity()).healthAdd(-3);
             final Toast toast = Toast.makeText(getContext().getApplicationContext(), "You gather rotten berry =(", Toast.LENGTH_SHORT);
             toast.show();
             Handler handler = new Handler();
@@ -194,13 +226,14 @@ public class GatherFragment extends Fragment {
         }
     }
 
+    //First Instrument Level
     void cutTreesByStoneAxe() {
-        ((PlayActivity) getActivity()).wood_button_action(3);
-        ((PlayActivity) getActivity()).stamina_button_action(-10);
+        ((PlayActivity) getActivity()).woodAdd(3);
+        ((PlayActivity) getActivity()).staminaAdd(-10);
 
         double chance = Math.random();
         if (chance + 0.9 < 1) {
-            ((PlayActivity) getActivity()).health_button_action(-10);
+            ((PlayActivity) getActivity()).healthAdd(-10);
             final Toast toast = Toast.makeText(getContext().getApplicationContext(), "You hit your foot by your stone axe =(", Toast.LENGTH_SHORT);
             toast.show();
 
@@ -215,12 +248,12 @@ public class GatherFragment extends Fragment {
     }
 
     void pickStonesWithStonePickaxe() {
-        ((PlayActivity) getActivity()).stone_button_action(3);
-        ((PlayActivity) getActivity()).stamina_button_action(-10);
+        ((PlayActivity) getActivity()).stoneAdd(3);
+        ((PlayActivity) getActivity()).staminaAdd(-10);
 
         double chance = Math.random();
         if (chance + 0.9 < 1) {
-            ((PlayActivity) getActivity()).health_button_action(-10);
+            ((PlayActivity) getActivity()).healthAdd(-10);
             final Toast toast = Toast.makeText(getContext().getApplicationContext(), "You hit your foot by your stone pickaxe =(", Toast.LENGTH_SHORT);
             toast.show();
 
@@ -235,12 +268,12 @@ public class GatherFragment extends Fragment {
     }
 
     void mowGrassWithStoneSickle() {
-        ((PlayActivity) getActivity()).fiber_button_action(3);
-        ((PlayActivity) getActivity()).stamina_button_action(-10);
+        ((PlayActivity) getActivity()).fiberAdd(3);
+        ((PlayActivity) getActivity()).staminaAdd(-10);
 
         double chance = Math.random();
         if (chance + 0.9 < 1) {
-            ((PlayActivity) getActivity()).health_button_action(-10);
+            ((PlayActivity) getActivity()).healthAdd(-10);
             final Toast toast = Toast.makeText(getContext().getApplicationContext(), "You hit your foot by your stone sickle =(", Toast.LENGTH_SHORT);
             toast.show();
 
@@ -253,9 +286,26 @@ public class GatherFragment extends Fragment {
             }, 1000);
         }
     }
+
+    void gatherBerriesInBasket() {
+        ((PlayActivity) getActivity()).foodAdd(2);
+        ((PlayActivity) getActivity()).staminaAdd(-10);
+
+        double chance = Math.random();
+        if (chance + 0.97 < 1) {
+            ((PlayActivity) getActivity()).healthAdd(-10);
+            final Toast toast = Toast.makeText(getContext().getApplicationContext(), "You gather basket of rotten berries =(", Toast.LENGTH_SHORT);
+            toast.show();
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    toast.cancel();
+                }
+            }, 1000);
+        }
+    }
 }
 
-
-//Можна додати тости про втрату причини
 
 

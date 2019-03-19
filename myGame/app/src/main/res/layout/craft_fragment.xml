@@ -38,7 +38,14 @@
                 android:layout_height="85dp"
                 android:background="@drawable/stone_sickle_icon"
                 />
+            <ImageView
+                android:layout_marginStart="50dp"
 
+                android:id="@+id/craft_fiber_basket"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:background="@drawable/basket_icon"
+                />
 
 
 
@@ -82,7 +89,17 @@
                 android:textSize="20sp"
                 android:textColor="#000"
                 android:textStyle="bold"/>
+            <TextView
+                android:layout_marginStart="50dp"
 
+                android:id="@+id/craft_fiber_basket_text"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:text="Fiber basket"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:textStyle="bold"/>
 
         </LinearLayout>
     </LinearLayout>

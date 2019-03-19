@@ -14,22 +14,30 @@ import luckycoolgames.mygame.Resources.types.Wood;
 import luckycoolgames.mygame.fragments.LoadingFragment;
 
 public class MainActivity extends AppCompatActivity {
-   private TextView newGame, continueGame;
+    private TextView newGame, continueGame;
     private FrameLayout frameLayout;
     FragmentManager fragmentManager = getFragmentManager();
     private LoadingFragment loadingFragment = new LoadingFragment();
+    PlayActivity playActivity = new PlayActivity();
+    Realm realm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        realm = Realm.getDefaultInstance();
         newGame = findViewById(R.id.new_game_button);
         continueGame = findViewById(R.id.continue_button);
         frameLayout = findViewById(R.id.frame_for_loading);
 
+        if(realm.isEmpty()){
+            continueGame.setVisibility(View.GONE);
 
+        }
+        realm.close();
         newGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Realm.deleteRealm(Realm.getDefaultConfiguration());
                 newGame.setEnabled(false);
                 continueGame.setVisibility(View.GONE);
                 newGame.animate().scaleX((float) 0).scaleY((float) 0).setDuration(1000).start();

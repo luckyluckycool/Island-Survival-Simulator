@@ -10,7 +10,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import io.realm.Realm;
-import luckycoolgames.mygame.Resources.types.Wood;
 import luckycoolgames.mygame.fragments.LoadingFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout frameLayout;
     FragmentManager fragmentManager = getFragmentManager();
     private LoadingFragment loadingFragment = new LoadingFragment();
-    PlayActivity playActivity = new PlayActivity();
     Realm realm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +29,14 @@ public class MainActivity extends AppCompatActivity {
 
         if(realm.isEmpty()){
             continueGame.setVisibility(View.GONE);
+            realm.close();
 
         }
         realm.close();
         newGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                realm.close();
                 Realm.deleteRealm(Realm.getDefaultConfiguration());
                 newGame.setEnabled(false);
                 continueGame.setVisibility(View.GONE);

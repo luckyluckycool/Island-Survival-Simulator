@@ -209,7 +209,7 @@ public class GatherFragment extends Fragment {
 
     void gatherBerries() {
         ((PlayActivity) getActivity()).foodAdd(1);
-        ((PlayActivity) getActivity()).staminaAdd(-10);
+        ((PlayActivity) getActivity()).staminaAdd(-5);
 
         double chance = Math.random();
         if (chance + 0.97 < 1) {
@@ -289,7 +289,7 @@ public class GatherFragment extends Fragment {
 
     void gatherBerriesInBasket() {
         ((PlayActivity) getActivity()).foodAdd(2);
-        ((PlayActivity) getActivity()).staminaAdd(-10);
+        ((PlayActivity) getActivity()).staminaAdd(-5);
 
         double chance = Math.random();
         if (chance + 0.97 < 1) {

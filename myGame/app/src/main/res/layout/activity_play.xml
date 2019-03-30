@@ -202,6 +202,7 @@
         android:gestureStrokeType="single"
         android:orientation="horizontal">-->
     <FrameLayout
+        android:layout_marginHorizontal="20dp"
         android:id="@+id/frame_for_action_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -39,7 +39,7 @@ public class GatherFragment extends Fragment {
         gatherFiberText = view.findViewById(R.id.gather_fiber_text);
         gatherFoodText = view.findViewById(R.id.gather_food_text);
 
-        switch (((PlayActivity) getActivity()).getList().get(woodInstrumentIndex)) {
+        switch (((PlayActivity) getActivity()).getResourceList().get(woodInstrumentIndex)) {
             case 0:
                 gatherWood.setBackgroundResource(R.drawable.hand_gathering);
                 gatherWoodText.setText("Gather sticks");
@@ -50,7 +50,7 @@ public class GatherFragment extends Fragment {
                 break;
         }
 
-        switch (((PlayActivity) getActivity()).getList().get(stoneInstrumentIndex)) {
+        switch (((PlayActivity) getActivity()).getResourceList().get(stoneInstrumentIndex)) {
 
             case 0:
                 gatherStone.setBackgroundResource(R.drawable.hand_gathering);
@@ -61,7 +61,7 @@ public class GatherFragment extends Fragment {
                 gatherStoneText.setText("Pick stone with pickaxe");
                 break;
         }
-        switch (((PlayActivity) getActivity()).getList().get(fiberInstrumentIndex)) {
+        switch (((PlayActivity) getActivity()).getResourceList().get(fiberInstrumentIndex)) {
             case 0:
                 gatherFiber.setBackgroundResource(R.drawable.hand_gathering);
                 gatherFiberText.setText("Gather fiber");
@@ -71,7 +71,7 @@ public class GatherFragment extends Fragment {
                 gatherFiberText.setText("Mow the grass");
                 break;
         }
-        switch (((PlayActivity) getActivity()).getList().get(foodInstrumentIndex)) {
+        switch (((PlayActivity) getActivity()).getResourceList().get(foodInstrumentIndex)) {
             case 0:
                 gatherFood.setBackgroundResource(R.drawable.hand_gathering);
                 gatherFoodText.setText("Gather berries");
@@ -86,7 +86,7 @@ public class GatherFragment extends Fragment {
         gatherWood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (((PlayActivity) getActivity()).getList().get(woodInstrumentIndex)) {
+                switch (((PlayActivity) getActivity()).getResourceList().get(woodInstrumentIndex)) {
                     case 0:
                         gatherSticks();
                         break;
@@ -100,7 +100,7 @@ public class GatherFragment extends Fragment {
         gatherStone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (((PlayActivity) getActivity()).getList().get(stoneInstrumentIndex)) {
+                switch (((PlayActivity) getActivity()).getResourceList().get(stoneInstrumentIndex)) {
                     case 0:
                         gatherRocks();
                         break;
@@ -114,7 +114,7 @@ public class GatherFragment extends Fragment {
         gatherFiber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (((PlayActivity) getActivity()).getList().get(fiberInstrumentIndex)) {
+                switch (((PlayActivity) getActivity()).getResourceList().get(fiberInstrumentIndex)) {
                     case 0:
                         gatherGrass();
                         break;
@@ -128,7 +128,7 @@ public class GatherFragment extends Fragment {
         gatherFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (((PlayActivity) getActivity()).getList().get(foodInstrumentIndex)) {
+                switch (((PlayActivity) getActivity()).getResourceList().get(foodInstrumentIndex)) {
                     case 0:
                         gatherBerries();
                         break;
@@ -139,7 +139,6 @@ public class GatherFragment extends Fragment {
 
             }
         });
-
 
         return view;
     }

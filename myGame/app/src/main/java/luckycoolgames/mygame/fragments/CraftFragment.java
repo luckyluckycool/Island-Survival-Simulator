@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import luckycoolgames.mygame.MyBook;
 import luckycoolgames.mygame.PlayActivity;
 import luckycoolgames.mygame.R;
 
@@ -49,11 +48,11 @@ public class CraftFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if (((PlayActivity) getActivity()).getList().get(woodIndex) >= 5 && ((PlayActivity) getActivity()).getList().get(stoneIndex) >= 3 && ((PlayActivity) getActivity()).getList().get(fiberIndex) >= 10 && ((PlayActivity) getActivity()).getList().get(staminaIndex) >= 20) {
+                if (((PlayActivity) getActivity()).getResourceList().get(woodIndex) >= 5 && ((PlayActivity) getActivity()).getResourceList().get(stoneIndex) >= 3 && ((PlayActivity) getActivity()).getResourceList().get(fiberIndex) >= 10 && ((PlayActivity) getActivity()).getResourceList().get(staminaIndex) >= 20) {
                     ((PlayActivity) getActivity()).staminaAdd(-20);
                     if (chance(0.8)) {
                         craft(5, 3, 10, 0, 0, 0);
-                        ((PlayActivity) getActivity()).getList().set(stoneInstrumentIndex,1);
+                        ((PlayActivity) getActivity()).getResourceList().set(woodInstrumentIndex,1);
                         craftStoneAxe.setVisibility(View.GONE);
                         craftStoneAxeText.setVisibility(View.GONE);
                     } else {
@@ -68,11 +67,11 @@ public class CraftFragment extends Fragment {
         craftStonePickaxe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (((PlayActivity) getActivity()).getList().get(woodIndex) >= 4 && ((PlayActivity) getActivity()).getList().get(stoneIndex) >= 4 && ((PlayActivity) getActivity()).getList().get(fiberIndex) >= 10 && ((PlayActivity) getActivity()).getList().get(staminaIndex) >= 20) {
+                if (((PlayActivity) getActivity()).getResourceList().get(woodIndex) >= 4 && ((PlayActivity) getActivity()).getResourceList().get(stoneIndex) >= 4 && ((PlayActivity) getActivity()).getResourceList().get(fiberIndex) >= 10 && ((PlayActivity) getActivity()).getResourceList().get(staminaIndex) >= 20) {
                     ((PlayActivity) getActivity()).staminaAdd(-20);
                     if (chance(0.8)) {
                         craft(4, 4, 10, 0, 0, 0);
-                        ((PlayActivity) getActivity()).getList().set(stoneInstrumentIndex,1);
+                        ((PlayActivity) getActivity()).getResourceList().set(stoneInstrumentIndex,1);
                         craftStonePickaxe.setVisibility(View.GONE);
                         craftStonePickaxeText.setVisibility(View.GONE);
                     } else {
@@ -87,11 +86,11 @@ public class CraftFragment extends Fragment {
         craftStoneSickle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (((PlayActivity) getActivity()).getList().get(woodIndex) >= 3 && ((PlayActivity) getActivity()).getList().get(stoneIndex) >= 3 && ((PlayActivity) getActivity()).getList().get(fiberIndex) >= 8 && ((PlayActivity) getActivity()).getList().get(staminaIndex) >= 20) {
+                if (((PlayActivity) getActivity()).getResourceList().get(woodIndex) >= 3 && ((PlayActivity) getActivity()).getResourceList().get(stoneIndex) >= 3 && ((PlayActivity) getActivity()).getResourceList().get(fiberIndex) >= 8 && ((PlayActivity) getActivity()).getResourceList().get(staminaIndex) >= 20) {
                     ((PlayActivity) getActivity()).staminaAdd(-20);
                     if (chance(0.8)) {
                         craft(3, 3, 8, 0, 0, 0);
-                        ((PlayActivity) getActivity()).getList().set(fiberInstrumentIndex,1);
+                        ((PlayActivity) getActivity()).getResourceList().set(fiberInstrumentIndex,1);
                         craftStoneSickle.setVisibility(View.GONE);
                         craftStoneSickleText.setVisibility(View.GONE);
                     } else {
@@ -106,11 +105,11 @@ public class CraftFragment extends Fragment {
         craftFiberBasket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (((PlayActivity) getActivity()).getList().get(fiberIndex) >= 20 && ((PlayActivity) getActivity()).getList().get(staminaIndex) >= 20) {
+                if (((PlayActivity) getActivity()).getResourceList().get(fiberIndex) >= 20 && ((PlayActivity) getActivity()).getResourceList().get(staminaIndex) >= 20) {
                     ((PlayActivity) getActivity()).staminaAdd(-20);
                     if (chance(0.8)) {
                         craft(0, 0, 20, 0, 0, 0);
-                        ((PlayActivity) getActivity()).getList().set(foodInstrumentIndex,1);
+                        ((PlayActivity) getActivity()).getResourceList().set(foodInstrumentIndex,1);
                         craftFiberBasket.setVisibility(View.GONE);
                         craftFiberBasketText.setVisibility(View.GONE);
                     } else {
@@ -123,24 +122,24 @@ public class CraftFragment extends Fragment {
             }
         });
 
-        switch (((PlayActivity)getActivity()).getList().get(woodInstrumentIndex)){
+        switch (((PlayActivity)getActivity()).getResourceList().get(woodInstrumentIndex)){
             case 1:
               craftStoneAxe.setVisibility(View.GONE);
               craftStoneAxeText.setVisibility(View.GONE);
 
         }
-        switch (((PlayActivity)getActivity()).getList().get(stoneInstrumentIndex)){
+        switch (((PlayActivity)getActivity()).getResourceList().get(stoneInstrumentIndex)){
             case 1:
                 craftStonePickaxe.setVisibility(View.GONE);
                 craftStonePickaxeText.setVisibility(View.GONE);
 
-        }switch (((PlayActivity)getActivity()).getList().get(fiberInstrumentIndex)){
+        }switch (((PlayActivity)getActivity()).getResourceList().get(fiberInstrumentIndex)){
             case 1:
                 craftStoneSickle.setVisibility(View.GONE);
                 craftStoneSickleText.setVisibility(View.GONE);
 
 
-        }switch (((PlayActivity)getActivity()).getList().get(foodInstrumentIndex)){
+        }switch (((PlayActivity)getActivity()).getResourceList().get(foodInstrumentIndex)){
             case 1:
                 craftFiberBasket.setVisibility(View.GONE);
                 craftFiberBasketText.setVisibility(View.GONE);

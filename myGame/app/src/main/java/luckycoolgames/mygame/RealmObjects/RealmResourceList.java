@@ -1,11 +1,11 @@
-package luckycoolgames.mygame;
+package luckycoolgames.mygame.RealmObjects;
 
 import java.util.List;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
 
-public class MyBook extends RealmObject {
+public class RealmResourceList extends RealmObject {
 
     private RealmList<Integer> list = new RealmList<>();
 

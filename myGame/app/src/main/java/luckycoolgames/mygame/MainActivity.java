@@ -17,7 +17,12 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout frameLayout;
     FragmentManager fragmentManager = getFragmentManager();
     private LoadingFragment loadingFragment = new LoadingFragment();
-    Realm realm;
+    private Realm realm;
+
+    public Realm getRealm() {
+        return realm;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
         Realm.init(getApplicationContext());
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
-        MyBook myBook = realm.createObject(MyBook.class);
-        if(myBook.getList().isEmpty()){
+        RealmResourceList myBook = realm.createObject(RealmResourceList.class);
+        if(myBook.getResourceList().isEmpty()){
             return true;
         }else {
             return false;

@@ -21,15 +21,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:noHistory="true"
+            android:noHistory="false"
             android:name=".PlayActivity"
             android:screenOrientation="userLandscape" >
 
         </activity>
-        <activity
-            android:noHistory="true"
-            android:name=".AndroidGestureActivity"
-            android:screenOrientation="userLandscape" />
+
     </application>
 
 </manifest>

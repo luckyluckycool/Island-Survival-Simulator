@@ -14,8 +14,7 @@ import luckycoolgames.mygame.R;
 
 
 public class CraftFragment extends Fragment {
-    private GatherFragment addButtonsFragment = new GatherFragment();
-    private ActionFragment actionButtonsFragment = new ActionFragment();
+
     private ImageView craftStoneAxe, craftStonePickaxe, craftStoneSickle, craftFiberBasket;
     private TextView craftStoneAxeText, craftStonePickaxeText, craftStoneSickleText, craftFiberBasketText;
     //resource Indexes

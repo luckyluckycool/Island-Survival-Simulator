@@ -24,6 +24,7 @@ import luckycoolgames.mygame.fragments.ActionFragment;
 import luckycoolgames.mygame.fragments.GatherFragment;
 import luckycoolgames.mygame.fragments.CraftFragment;
 import luckycoolgames.mygame.fragments.StorageFragment;
+import luckycoolgames.mygame.fragments.TempFragment;
 
 public class PlayActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -100,7 +101,7 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
 
         setTextsFromList();
 
-        loadFragment(new GatherFragment());
+        loadFragment(new TempFragment());
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
@@ -354,4 +355,11 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
         else
             return false;
     }
+
+    public int getWoodInstrument(){
+       int lvl;
+       lvl = resourceList.get(woodInstrumentIndex);
+       return lvl;
+    }
+
 }

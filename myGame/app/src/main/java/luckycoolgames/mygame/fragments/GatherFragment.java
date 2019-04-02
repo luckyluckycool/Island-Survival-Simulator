@@ -3,6 +3,8 @@ package luckycoolgames.mygame.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +12,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import luckycoolgames.mygame.Adapters.GatherRecycleAdapter;
+import luckycoolgames.mygame.Adapters.RecyclerViewData;
 import luckycoolgames.mygame.PlayActivity;
 import luckycoolgames.mygame.R;
 
 public class GatherFragment extends Fragment {
+    RecyclerViewData data = new RecyclerViewData();
+    private RecyclerView recyclerView;
+    private GatherRecycleAdapter recyclerAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+
+
     private int woodIndex = 0;
     private int stoneIndex = 1;
     private int fiberIndex = 2;
@@ -30,7 +40,7 @@ public class GatherFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.gather_fragment, container, false);
-        gatherWood = view.findViewById(R.id.gather_wood_button);
+        /*gatherWood = view.findViewById(R.id.gather_wood_button);
         gatherStone = view.findViewById(R.id.gather_stone_button);
         gatherFiber = view.findViewById(R.id.gather_fiber_button);
         gatherFood = view.findViewById(R.id.gather_food_button);
@@ -49,7 +59,6 @@ public class GatherFragment extends Fragment {
                 gatherWoodText.setText("Chop trees");
                 break;
         }
-
         switch (((PlayActivity) getActivity()).getResourceList().get(stoneInstrumentIndex)) {
 
             case 0:
@@ -81,9 +90,16 @@ public class GatherFragment extends Fragment {
                 gatherFoodText.setText("Gather in basket");
                 break;
 
-        }
+        }*/
 
-        gatherWood.setOnClickListener(new View.OnClickListener() {
+        recyclerView = view.findViewById(R.id.gatherRecycleView);
+        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerAdapter = new GatherRecycleAdapter(data.gatherImages(getWoodInstrument(), getStoneInstrument(), getFiberInstrument(), getFoodInstrument()), data.gatherTexts(getWoodInstrument(), getStoneInstrument(), getFiberInstrument(), getFoodInstrument()));
+        recyclerView.setAdapter(recyclerAdapter);
+
+        /*gatherWood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (((PlayActivity) getActivity()).getResourceList().get(woodInstrumentIndex)) {
@@ -138,13 +154,13 @@ public class GatherFragment extends Fragment {
                 }
 
             }
-        });
+        });*/
 
         return view;
     }
 
     //Zero Instrument Level
-    void gatherSticks() {
+    public void gatherSticks() {
 
         ((PlayActivity) getActivity()).woodAdd(1);
         ((PlayActivity) getActivity()).staminaAdd(-5);
@@ -166,7 +182,7 @@ public class GatherFragment extends Fragment {
 
     }
 
-    void gatherRocks() {
+    public void gatherRocks() {
         ((PlayActivity) getActivity()).stoneAdd(1);
         ((PlayActivity) getActivity()).staminaAdd(-5);
 
@@ -186,7 +202,7 @@ public class GatherFragment extends Fragment {
         }
     }
 
-    void gatherGrass() {
+    public void gatherGrass() {
         ((PlayActivity) getActivity()).fiberAdd(1);
         ((PlayActivity) getActivity()).staminaAdd(-5);
 
@@ -206,7 +222,7 @@ public class GatherFragment extends Fragment {
         }
     }
 
-    void gatherBerries() {
+    public void gatherBerries() {
         ((PlayActivity) getActivity()).foodAdd(1);
         ((PlayActivity) getActivity()).staminaAdd(-5);
 
@@ -226,7 +242,7 @@ public class GatherFragment extends Fragment {
     }
 
     //First Instrument Level
-    void cutTreesByStoneAxe() {
+    public void cutTreesByStoneAxe() {
         ((PlayActivity) getActivity()).woodAdd(3);
         ((PlayActivity) getActivity()).staminaAdd(-10);
 
@@ -246,7 +262,7 @@ public class GatherFragment extends Fragment {
         }
     }
 
-    void pickStonesWithStonePickaxe() {
+    public void pickStonesWithStonePickaxe() {
         ((PlayActivity) getActivity()).stoneAdd(3);
         ((PlayActivity) getActivity()).staminaAdd(-10);
 
@@ -266,7 +282,7 @@ public class GatherFragment extends Fragment {
         }
     }
 
-    void mowGrassWithStoneSickle() {
+    public void mowGrassWithStoneSickle() {
         ((PlayActivity) getActivity()).fiberAdd(3);
         ((PlayActivity) getActivity()).staminaAdd(-10);
 
@@ -286,7 +302,7 @@ public class GatherFragment extends Fragment {
         }
     }
 
-    void gatherBerriesInBasket() {
+    public void gatherBerriesInBasket() {
         ((PlayActivity) getActivity()).foodAdd(2);
         ((PlayActivity) getActivity()).staminaAdd(-5);
 
@@ -304,7 +320,90 @@ public class GatherFragment extends Fragment {
             }, 1000);
         }
     }
+
+    public int getWoodInstrument() {
+        int woodInstrument;
+
+        woodInstrument = ((PlayActivity) getActivity()).getResourceList().get(woodInstrumentIndex);
+
+        return woodInstrument;
+    }
+
+    public int getFoodInstrument() {
+        int foodInstrument;
+
+        foodInstrument = ((PlayActivity) getActivity()).getResourceList().get(foodInstrumentIndex);
+
+        return foodInstrument;
+    }
+
+    public int getFiberInstrument() {
+        int fiberInstrument;
+
+        fiberInstrument = ((PlayActivity) getActivity()).getResourceList().get(fiberInstrumentIndex);
+
+        return fiberInstrument;
+    }
+
+    public int getStoneInstrument() {
+        int stoneInstrument;
+
+        stoneInstrument = ((PlayActivity) getActivity()).getResourceList().get(stoneInstrumentIndex);
+
+        return stoneInstrument;
+    }
+
+
+    /*@Override
+    public void onGatherClick(int position) {
+        switch (position) {
+            case 0:
+                switch (((PlayActivity) getActivity()).getResourceList().get(woodInstrumentIndex)) {
+                    case 0:
+                        gatherSticks();
+                        break;
+                    case 1:
+                        cutTreesByStoneAxe();
+                        break;
+                }
+                break;
+            case 1:
+                switch (((PlayActivity) getActivity()).getResourceList().get(stoneInstrumentIndex)) {
+                    case 0:
+                        gatherRocks();
+                        break;
+                    case 1:
+                        pickStonesWithStonePickaxe();
+                        break;
+                }
+                break;
+            case 2:
+                switch (((PlayActivity) getActivity()).getResourceList().get(fiberInstrumentIndex)) {
+                    case 0:
+                        gatherGrass();
+                        break;
+                    case 1:
+                        mowGrassWithStoneSickle();
+                        break;
+                }
+                break;
+            case 3:
+                switch (((PlayActivity) getActivity()).getResourceList().get(foodInstrumentIndex)) {
+                    case 0:
+                        gatherBerries();
+                        break;
+                    case 1:
+                        gatherBerriesInBasket();
+                        break;
+                }
+                break;
+
+        }
+
+    }*/
 }
+
+
 
 
 

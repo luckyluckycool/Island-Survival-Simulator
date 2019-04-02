@@ -10,13 +10,13 @@ import android.widget.TextView;
 
 import luckycoolgames.mygame.R;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ImageViewHolder> {
+public class StorageRecyclerAdapter extends RecyclerView.Adapter<StorageRecyclerAdapter.ImageViewHolder> {
 
     private int[] resourceImages;
 
     private String[] resourceTexts;
 
-    public RecyclerAdapter(int[] images, String[] texts){
+    public StorageRecyclerAdapter(int[] images, String[] texts){
         this.resourceImages = images;
         this.resourceTexts = texts;
     }
@@ -24,7 +24,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ImageV
 
     @Override
     public ImageViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.resource_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.storage_resource_layout, parent, false);
         ImageViewHolder imageViewHolder = new ImageViewHolder(view);
         return imageViewHolder;
     }
@@ -51,6 +51,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ImageV
             super(itemView);
             resourceImage = itemView.findViewById(R.id.resource_image);
             resourceText = itemView.findViewById(R.id.resource_text);
+
         }
     }
 }

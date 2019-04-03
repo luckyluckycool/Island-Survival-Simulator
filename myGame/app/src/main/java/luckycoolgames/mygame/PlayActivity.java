@@ -52,8 +52,7 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
     private boolean death;
 
 
-    //eat counter
-    private int n = 0;
+
 
     //resource Indexes
     private int woodIndex = 0;
@@ -131,7 +130,6 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
     public void healthAdd(int value) {
 
         if (resourceList.get(healthIndex) + value <= 0) {
-            death = true;
             youDied.setVisibility(View.VISIBLE);
             youDied.bringToFront();
 
@@ -156,7 +154,6 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
     public void staminaAdd(int value) {
 
         if (resourceList.get(staminaIndex) + value <= 0) {
-            death = true;
             bottomNavigationView.setVisibility(View.GONE);
             youDied.setVisibility(View.VISIBLE);
             youDied.bringToFront();
@@ -180,45 +177,13 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
         }
     }
 
-    public void eatFoodAction() {
-        if (!(resourceList.get(foodIndex) <= 0)) {
-            foodAdd(-1);
-            if (chance(0.97)) {
-                staminaAdd(10);
-                n++;
-                if (n == 5) {
-                    healthAdd(3);
-                    n = 0;
-                }
 
-            } else {
-                healthAdd(-5);
-                n = 0;
-
-                final Toast toast = Toast.makeText(this, "You eat rotten food", Toast.LENGTH_SHORT);
-                toast.show();
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        toast.cancel();
-                    }
-                }, 1000);
-
-            }
-
-        }
-    }
 
 
     //resourceList g&s
 
     public List<Integer> getResourceList() {
         return resourceList;
-    }
-
-    public void setResourceList(List<Integer> resourceList) {
-        this.resourceList = resourceList;
     }
 
 
@@ -334,8 +299,10 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     protected void onStop() {
-        resourcesToRealm(resourceList);
-        Realm.compactRealm(Realm.getDefaultConfiguration());
+        if (realm != null && !realm.isClosed()) {
+            resourcesToRealm(resourceList);
+            Realm.compactRealm(Realm.getDefaultConfiguration());
+        }
         super.onStop();
 
     }
@@ -343,7 +310,7 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
     //onDestroy
     @Override
     protected void onDestroy() {
-                realm.close();
+        realm.close();
         super.onDestroy();
     }
 
@@ -356,10 +323,8 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
             return false;
     }
 
-    public int getWoodInstrument(){
-       int lvl;
-       lvl = resourceList.get(woodInstrumentIndex);
-       return lvl;
-    }
 
+    @Override
+    public void onBackPressed() {
+    }
 }

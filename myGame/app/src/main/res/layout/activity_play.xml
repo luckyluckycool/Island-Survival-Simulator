@@ -1,21 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.PlayActivity">
+
+
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/mb_play"
     android:orientation="horizontal"
-    tools:context=".PlayActivity">
+    tools:context=".Activities.PlayActivity">
 <ImageView
     android:id="@+id/you_died"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="gone"
     android:background="@drawable/you_died"
-
     />
 
+    <ImageView
+        android:id="@+id/sleep_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@drawable/mb_main"/>
+    <TextView
+        android:id="@+id/sleep_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="100sp"
+        android:layout_centerInParent="true"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -222,3 +246,4 @@
     <!--</android.gesture.GestureOverlayView>-->
 
 </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

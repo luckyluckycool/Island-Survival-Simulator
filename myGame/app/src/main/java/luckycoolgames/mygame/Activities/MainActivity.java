@@ -1,23 +1,20 @@
-package luckycoolgames.mygame;
+package luckycoolgames.mygame.Activities;
 
-import android.app.FragmentManager;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import io.realm.Realm;
-import luckycoolgames.mygame.fragments.LoadingFragment;
+import luckycoolgames.mygame.R;
 
 public class MainActivity extends AppCompatActivity {
     private TextView newGame, continueGame;
-    private FrameLayout frameLayout;
-    FragmentManager fragmentManager = getFragmentManager();
-    private LoadingFragment loadingFragment = new LoadingFragment();
     private Realm realm;
+    private Handler handler = new Handler();
 
     public Realm getRealm() {
         return realm;
@@ -25,19 +22,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         realm = Realm.getDefaultInstance();
         newGame = findViewById(R.id.new_game_button);
         continueGame = findViewById(R.id.continue_button);
-        frameLayout = findViewById(R.id.frame_for_loading);
 
-        if(realm.isEmpty()){
+        if (realm.isEmpty())
             continueGame.setVisibility(View.GONE);
-            realm.close();
-
-        }
         realm.close();
+        realm.compactRealm(Realm.getDefaultConfiguration());
+
         newGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,28 +42,21 @@ public class MainActivity extends AppCompatActivity {
                 newGame.setEnabled(false);
                 continueGame.setVisibility(View.GONE);
                 newGame.animate().scaleX((float) 0).scaleY((float) 0).setDuration(1000).start();
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        frameLayout.bringToFront();
-                        fragmentManager.beginTransaction().replace(R.id.frame_for_loading, loadingFragment).commit();
-                    }
 
-                }, 1000);
+                Intent intent = new Intent(MainActivity.this, PlayActivity.class);
+                startActivity(intent);
+
+
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         Intent intent = new Intent(MainActivity.this, PlayActivity.class);
                         startActivity(intent);
                     }
-                }, 5000);
+
+                }, 1000);
             }
         });
-
-        /*if (realmIsEmpty()){
-            continueGame.setVisibility(View.GONE);
-        }*/
 
         continueGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,15 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 continueGame.setEnabled(false);
                 newGame.setVisibility(View.GONE);
                 continueGame.animate().scaleX((float) 0).scaleY((float) 0).setDuration(1000).start();
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        frameLayout.bringToFront();
-                        fragmentManager.beginTransaction().replace(R.id.frame_for_loading, loadingFragment).commit();
-                    }
 
-                }, 1000);
+
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -91,21 +73,11 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
 
-                }, 5000);
+                }, 1000);
+
             }
         });
 
 
     }
-    /*private boolean realmIsEmpty(){
-        Realm.init(getApplicationContext());
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-        RealmResourceList myBook = realm.createObject(RealmResourceList.class);
-        if(myBook.getResourceList().isEmpty()){
-            return true;
-        }else {
-            return false;
-        }
-    }*/
 }

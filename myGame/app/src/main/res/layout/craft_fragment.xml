@@ -1,106 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:id="@+id/craft_fragment"
-        android:layout_gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:scrollbars="horizontal">
 
         <LinearLayout
-
+            android:id="@+id/craft_fragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/craft_stone_axe"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:background="@drawable/stone_axe_icon"
-                />
-            <ImageView
-                android:layout_marginStart="50dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                android:id="@+id/craft_stone_pickaxe"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:background="@drawable/stone_pickaxe_icon"
-                />
-            <ImageView
-                android:layout_marginStart="50dp"
+                <ImageView
+                    android:layout_marginStart="50dp"
 
-                android:id="@+id/craft_stone_sickle"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:background="@drawable/stone_sickle_icon"
-                />
-            <ImageView
-                android:layout_marginStart="50dp"
+                    android:id="@+id/craft_wood_instrument"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:background="@drawable/stone_axe_icon" />
 
-                android:id="@+id/craft_fiber_basket"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:background="@drawable/basket_icon"
-                />
+                <TextView
+                    android:layout_marginStart="50dp"
 
+                    android:id="@+id/craft_wood_instrument_text"
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="Stone axe"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/craft_stone_instrument"
+                    android:layout_width="85dp"
+
+                    android:layout_height="85dp"
+                    android:layout_marginStart="50dp"
+                    android:background="@drawable/stone_pickaxe_icon" />
+
+                <TextView
+                    android:id="@+id/craft_stone_instrument_text"
+                    android:layout_width="85dp"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:text="Stone pickaxe"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/craft_fiber_instrument"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:layout_marginStart="50dp"
+                    android:background="@drawable/stone_sickle_icon" />
+
+                <TextView
+                    android:id="@+id/craft_fiber_instrument_text"
+                    android:layout_width="85dp"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:text="Stone sickle"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/craft_food_instrument"
+                    android:layout_width="85dp"
+
+                    android:layout_height="85dp"
+                    android:layout_marginStart="50dp"
+                    android:background="@drawable/basket_icon" />
+
+                <TextView
+                    android:id="@+id/craft_food_instrument_text"
+                    android:layout_width="85dp"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:text="Fiber basket"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:id="@+id/craft_bed"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:layout_marginStart="50dp"
+                    android:background="@drawable/simple_bed_icon" />
+
+                <TextView
+                    android:id="@+id/craft_bed_text"
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:text="Fiber  bed"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:id="@+id/craft_storage"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:layout_marginStart="50dp"
+                    android:background="@drawable/wood_box_icon" />
+
+                <TextView
+                    android:id="@+id/craft_storage_text"
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:text="Wood box"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="85dp"
+
+                    android:layout_height="85dp"
+                    android:layout_marginStart="50dp"
+                    android:background="@drawable/basket_icon" />
+
+                <TextView
+                    android:layout_width="85dp"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:text="Fiber basket"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="85dp"
+
+                    android:layout_height="85dp"
+                    android:layout_marginStart="50dp"
+                    android:background="@drawable/basket_icon" />
+
+                <TextView
+                    android:layout_width="85dp"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:text="Fiber basket"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            >
-
-            <TextView
-                android:id="@+id/craft_stone_axe_text"
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:text="Stone axe"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textColor="#000"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:layout_marginStart="50dp"
-
-                android:id="@+id/craft_stone_pickaxe_text"
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:text="Stone pickaxe"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textColor="#000"
-                android:textStyle="bold"/>
-            <TextView
-                android:layout_marginStart="50dp"
-
-                android:id="@+id/craft_stone_sickle_text"
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:text="Stone sickle"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textColor="#000"
-                android:textStyle="bold"/>
-            <TextView
-                android:layout_marginStart="50dp"
-
-                android:id="@+id/craft_fiber_basket_text"
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:text="Fiber basket"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textColor="#000"
-                android:textStyle="bold"/>
-
-        </LinearLayout>
-    </LinearLayout>
+    </HorizontalScrollView>
 </LinearLayout>

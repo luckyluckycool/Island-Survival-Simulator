@@ -1,11 +1,8 @@
 package luckycoolgames.mygame.fragments;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,27 +11,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 //import luckycoolgames.mygame.Adapters.GatherRecycleAdapter;
-import luckycoolgames.mygame.Adapters.RecyclerViewData;
-import luckycoolgames.mygame.PlayActivity;
+import luckycoolgames.mygame.Activities.PlayActivity;
 import luckycoolgames.mygame.R;
 
 public class GatherFragment extends Fragment {
-    RecyclerViewData data = new RecyclerViewData();
-    private RecyclerView recyclerView;
+    //RecyclerViewData data = new RecyclerViewData();
+    //private RecyclerView recyclerView;
     //private GatherRecycleAdapter recyclerAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+    //private RecyclerView.LayoutManager layoutManager;
 
-
-    private int woodIndex = 0;
-    private int stoneIndex = 1;
-    private int fiberIndex = 2;
-    private int foodIndex = 3;
-    private int healthIndex = 4;
-    private int staminaIndex = 5;
-    private int woodInstrumentIndex = 6;
-    private int stoneInstrumentIndex = 7;
-    private int fiberInstrumentIndex = 8;
-    private int foodInstrumentIndex = 9;
 
     private ImageView gatherWood, gatherStone, gatherFiber, gatherFood;
     private TextView gatherWoodText, gatherStoneText, gatherFiberText, gatherFoodText;
@@ -165,13 +150,23 @@ public class GatherFragment extends Fragment {
 
     //Zero Instrument Level
     public void gatherSticks() {
+        switch (getStorage()) {
+            case 0:
+                if (getWood() != 20)
+                    staminaAdd(-5);
+                woodAdd(1, 20);
+                break;
+            case 1:
+                if (getWood() != 75)
+                    staminaAdd(-5);
+                woodAdd(1, 75);
+                break;
+        }
 
-        woodAdd(1);
-        staminaAdd(-5);
 
-        if (chance(0.97)) {
+        if (!chance(0.97)) {
             healthAdd(-3);
-            final Toast toast = Toast.makeText(getActivity().getApplicationContext(), "You ran a splinter in your finger =(", Toast.LENGTH_SHORT);
+            /*final Toast toast = Toast.makeText(getActivity().getApplicationContext(), "You ran a splinter in your finger =(", Toast.LENGTH_SHORT);
             toast.show();
 
             Handler handler = new Handler();
@@ -180,18 +175,30 @@ public class GatherFragment extends Fragment {
                 public void run() {
                     toast.cancel();
                 }
-            }, 1000);
+            }, 1000);*/
+
+            showSnackbar("You ran a splinter in your finger =(");
         }
 
     }
 
     public void gatherRocks() {
-        stoneAdd(1);
-        staminaAdd(-5);
+        switch (getStorage()) {
+            case 0:
+                if (getStone() != 20)
+                    staminaAdd(-5);
+                stoneAdd(1, 20);
+                break;
+            case 1:
+                if (getStone() != 75)
+                    staminaAdd(-5);
+                stoneAdd(1, 75);
+                break;
+        }
 
-        if (chance(0.97)) {
+        if (!chance(0.97)) {
             healthAdd(-3);
-            final Toast toast = Toast.makeText(getActivity().getApplicationContext(), "You hit your foot finger by hided stone =(", Toast.LENGTH_SHORT);
+            /*final Toast toast = Toast.makeText(getActivity().getApplicationContext(), "You hit your foot finger by hided stone =(", Toast.LENGTH_SHORT);
             toast.show();
 
             Handler handler = new Handler();
@@ -200,17 +207,28 @@ public class GatherFragment extends Fragment {
                 public void run() {
                     toast.cancel();
                 }
-            }, 1000);
+            }, 1000);*/
+            showSnackbar("You hit your foot finger by hided stone =(");
         }
     }
 
     public void gatherGrass() {
-        fiberAdd(1);
-        staminaAdd(-5);
+        switch (getStorage()) {
+            case 0:
+                if (getFiber() != 20)
+                    staminaAdd(-5);
+                fiberAdd(1, 20);
+                break;
+            case 1:
+                if (getFiber() != 75)
+                    staminaAdd(-5);
+                fiberAdd(1, 75);
+                break;
+        }
 
-        if (chance(0.97)) {
+        if (!chance(0.97)) {
             healthAdd(-3);
-            final Toast toast = Toast.makeText(getActivity(), "You slip and fall on the wet grass =(", Toast.LENGTH_SHORT);
+            /*final Toast toast = Toast.makeText(getActivity(), "You slip and fall on the wet grass =(", Toast.LENGTH_SHORT);
             toast.show();
 
             Handler handler = new Handler();
@@ -219,18 +237,30 @@ public class GatherFragment extends Fragment {
                 public void run() {
                     toast.cancel();
                 }
-            }, 1000);
+            }, 1000);*/
+            showSnackbar("You slip and fall on the wet grass =(");
         }
     }
 
     public void gatherBerries() {
-        foodAdd(1);
-        staminaAdd(-5);
+        switch (getStorage()) {
+            case 0:
+                if (getFood() != 20)
+                    staminaAdd(-5);
+                foodAdd(1, 20);
+
+                break;
+            case 1:
+                if (getFood() != 75)
+                    staminaAdd(-5);
+                foodAdd(1, 75);
+                break;
+        }
 
 
-        if (chance(0.97)) {
+        if (!chance(0.97)) {
             healthAdd(-3);
-            final Toast toast = Toast.makeText(getActivity().getApplicationContext(), "You gather rotten berry =(", Toast.LENGTH_SHORT);
+            /*final Toast toast = Toast.makeText(getActivity().getApplicationContext(), "You gather rotten berry =(", Toast.LENGTH_SHORT);
             toast.show();
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -238,18 +268,29 @@ public class GatherFragment extends Fragment {
                 public void run() {
                     toast.cancel();
                 }
-            }, 1000);
+            }, 1000);*/
+            showSnackbar("You gather rotten berry =(");
         }
     }
 
     //First Instrument Level
     public void cutTreesByStoneAxe() {
-        woodAdd(3);
-        staminaAdd(-10);
+        switch (getStorage()) {
+            case 0:
+                if (getWood() != 20)
+                    staminaAdd(-10);
+                woodAdd(3, 20);
+                break;
+            case 1:
+                if (getWood() != 75)
+                    staminaAdd(-10);
+                woodAdd(3, 75);
+                break;
+        }
 
-        if (chance(0.9)) {
+        if (!chance(0.9)) {
             healthAdd(-10);
-            final Toast toast = Toast.makeText(getActivity().getApplicationContext(), "You hit your foot by your stone axe =(", Toast.LENGTH_SHORT);
+            /*final Toast toast = Toast.makeText(getActivity().getApplicationContext(), "You hit your foot by your stone axe =(", Toast.LENGTH_SHORT);
             toast.show();
 
             Handler handler = new Handler();
@@ -258,17 +299,28 @@ public class GatherFragment extends Fragment {
                 public void run() {
                     toast.cancel();
                 }
-            }, 1000);
+            }, 1000);*/
+            showSnackbar("You hit your foot by your stone axe =(");
         }
     }
 
     public void pickStonesWithStonePickaxe() {
-        stoneAdd(3);
-        staminaAdd(-10);
+        switch (getStorage()) {
+            case 0:
+                if (getStone() != 20)
+                    staminaAdd(-10);
+                stoneAdd(3, 20);
+                break;
+            case 1:
+                if (getWood() != 75)
+                    staminaAdd(-10);
+                stoneAdd(3, 75);
+                break;
+        }
 
-        if (chance(0.9)) {
+        if (!chance(0.9)) {
             healthAdd(-10);
-            final Toast toast = Toast.makeText(getActivity(), "You hit your foot by your stone pickaxe =(", Toast.LENGTH_SHORT);
+            /*final Toast toast = Toast.makeText(getActivity(), "You hit your foot by your stone pickaxe =(", Toast.LENGTH_SHORT);
             toast.show();
 
             Handler handler = new Handler();
@@ -277,17 +329,28 @@ public class GatherFragment extends Fragment {
                 public void run() {
                     toast.cancel();
                 }
-            }, 1000);
+            }, 1000);*/
+            showSnackbar("You hit your foot by your stone pickaxe =(");
         }
     }
 
     public void mowGrassWithStoneSickle() {
-        fiberAdd(3);
-        staminaAdd(-10);
+        switch (getStorage()) {
+            case 0:
+                if (getFiber() != 20)
+                    staminaAdd(-10);
+                fiberAdd(3, 20);
+                break;
+            case 1:
+                if (getFiber() != 75)
+                    staminaAdd(-10);
+                fiberAdd(3, 75);
+                break;
+        }
 
-        if (chance(0.9)) {
-            ((PlayActivity) getActivity()).healthAdd(-10);
-            final Toast toast = Toast.makeText(getActivity().getApplicationContext(), "You hit your foot by your stone sickle =(", Toast.LENGTH_SHORT);
+        if (!chance(0.9)) {
+            healthAdd(-10);
+            /*final Toast toast = Toast.makeText(getActivity().getApplicationContext(), "You hit your foot by your stone sickle =(", Toast.LENGTH_SHORT);
             toast.show();
 
             Handler handler = new Handler();
@@ -296,18 +359,29 @@ public class GatherFragment extends Fragment {
                 public void run() {
                     toast.cancel();
                 }
-            }, 1000);
+            }, 1000);*/
+            showSnackbar("You hit your foot by your stone sickle =(");
+
         }
     }
 
     public void gatherBerriesInBasket() {
-        foodAdd(2);
-        staminaAdd(-5);
+        switch (getStorage()) {
+            case 0:
+                if (getFood() != 20)
+                    staminaAdd(-5);
+                foodAdd(2, 20);
+                break;
+            case 1:
+                if (getFood() != 75)
+                    staminaAdd(-5);
+                foodAdd(2, 75);
+                break;
+        }
 
-        double chance = Math.random();
-        if (chance(0.9)) {
-            ((PlayActivity) getActivity()).healthAdd(-10);
-            final Toast toast = Toast.makeText(getActivity().getApplicationContext(), "You gather basket of rotten berries =(", Toast.LENGTH_SHORT);
+        if (!chance(0.9)) {
+            healthAdd(-10);
+            /*final Toast toast = Toast.makeText(getActivity().getApplicationContext(), "You gather basket of rotten berries =(", Toast.LENGTH_SHORT);
             toast.show();
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -315,68 +389,80 @@ public class GatherFragment extends Fragment {
                 public void run() {
                     toast.cancel();
                 }
-            }, 1000);
+            }, 1000);*/
+            showSnackbar("You gather basket of rotten berries =(");
         }
     }
 
 
-
-
-    public int getWoodInstrument() {
-        int woodInstrument;
-
-        woodInstrument = ((PlayActivity) getActivity()).getResourceList().get(woodInstrumentIndex);
-
-        return woodInstrument;
+    private int getWoodInstrument() {
+        return ((PlayActivity) getActivity()).getBuildedList().get(getResources().getInteger(R.integer.WOOD_INSTRUMENT_INDEX));
     }
 
-    public int getFoodInstrument() {
-        int foodInstrument;
-
-        foodInstrument = ((PlayActivity) getActivity()).getResourceList().get(foodInstrumentIndex);
-
-        return foodInstrument;
+    private int getStoneInstrument() {
+        return ((PlayActivity) getActivity()).getBuildedList().get(getResources().getInteger(R.integer.STONE_INSTRUMENT_INDEX));
     }
 
-    public int getFiberInstrument() {
-        int fiberInstrument;
-
-        fiberInstrument = ((PlayActivity) getActivity()).getResourceList().get(fiberInstrumentIndex);
-
-        return fiberInstrument;
+    private int getFiberInstrument() {
+        return ((PlayActivity) getActivity()).getBuildedList().get(getResources().getInteger(R.integer.FIBER_INSTRUMENT_INDEX));
     }
 
-    public int getStoneInstrument() {
-        int stoneInstrument;
+    private int getFoodInstrument() {
+        return ((PlayActivity) getActivity()).getBuildedList().get(getResources().getInteger(R.integer.FOOD_INSTRUMENT_INDEX));
+    }
 
-        stoneInstrument = ((PlayActivity) getActivity()).getResourceList().get(stoneInstrumentIndex);
-
-        return stoneInstrument;
+    private int getStorage() {
+        return ((PlayActivity) getActivity()).getBuildedList().get(getResources().getInteger(R.integer.STORAGE_INDEX));
     }
 
     private void woodAdd(int value) {
         ((PlayActivity) getActivity()).woodAdd(value);
     }
 
+    private void woodAdd(int value, int limit) {
+        ((PlayActivity) getActivity()).woodAdd(value, limit);
+    }
+
     private void stoneAdd(int value) {
         ((PlayActivity) getActivity()).stoneAdd(value);
+    }
+
+    private void stoneAdd(int value, int limit) {
+        ((PlayActivity) getActivity()).stoneAdd(value, limit);
     }
 
     private void fiberAdd(int value) {
         ((PlayActivity) getActivity()).fiberAdd(value);
     }
 
+    private void fiberAdd(int value, int limit) {
+        ((PlayActivity) getActivity()).fiberAdd(value, limit);
+    }
+
     private void foodAdd(int value) {
         ((PlayActivity) getActivity()).foodAdd(value);
+    }
+
+    private void foodAdd(int value, int limit) {
+        ((PlayActivity) getActivity()).foodAdd(value, limit);
     }
 
     private void staminaAdd(int value) {
         ((PlayActivity) getActivity()).staminaAdd(value);
     }
 
+    private void staminaAdd(int value, int limit) {
+        ((PlayActivity) getActivity()).staminaAdd(value, limit);
+    }
+
     private void healthAdd(int value) {
         ((PlayActivity) getActivity()).healthAdd(value);
     }
+
+    private void healthAdd(int value, int limit) {
+        ((PlayActivity) getActivity()).healthAdd(value, limit);
+    }
+
 
     public boolean chance(double chance) {
         double random = Math.random();
@@ -385,6 +471,35 @@ public class GatherFragment extends Fragment {
         else
             return false;
     }
+
+    private void showSnackbar(String text) {
+        ((PlayActivity) getActivity()).showSnackbar(text,500);
+    }
+
+    private int getWood() {
+        return ((PlayActivity) getActivity()).getResourceList().get(getResources().getInteger(R.integer.WOOD_INDEX));
+    }
+
+    private int getStone() {
+        return ((PlayActivity) getActivity()).getResourceList().get(getResources().getInteger(R.integer.STONE_INDEX));
+    }
+
+    private int getFiber() {
+        return ((PlayActivity) getActivity()).getResourceList().get(getResources().getInteger(R.integer.FIBER_INDEX));
+    }
+
+    private int getFood() {
+        return ((PlayActivity) getActivity()).getResourceList().get(getResources().getInteger(R.integer.FOOD_INDEX));
+    }
+
+    private int getHealth() {
+        return ((PlayActivity) getActivity()).getResourceList().get(getResources().getInteger(R.integer.HEALTH_INDEX));
+    }
+
+    private int getStamina() {
+        return ((PlayActivity) getActivity()).getResourceList().get(getResources().getInteger(R.integer.STAMINA_INDEX));
+    }
+
 
     //commented
     /*@Override

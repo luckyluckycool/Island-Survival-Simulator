@@ -9,149 +9,214 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import luckycoolgames.mygame.PlayActivity;
+import luckycoolgames.mygame.Activities.PlayActivity;
 import luckycoolgames.mygame.R;
 
 
 public class CraftFragment extends Fragment {
 
-    private ImageView craftStoneAxe, craftStonePickaxe, craftStoneSickle, craftFiberBasket;
-    private TextView craftStoneAxeText, craftStonePickaxeText, craftStoneSickleText, craftFiberBasketText;
-    //resource Indexes
-    private int woodIndex = 0;
-    private int stoneIndex = 1;
-    private int fiberIndex = 2;
-    private int foodIndex = 3;
-    private int healthIndex = 4;
-    private int staminaIndex = 5;
-    private int woodInstrumentIndex = 6;
-    private int stoneInstrumentIndex = 7;
-    private int fiberInstrumentIndex = 8;
-    private int foodInstrumentIndex = 9;
+    private ImageView craftWoodInstrument, craftStoneInstrument, craftFiberInstrument, craftFoodInstrument, craftBed, craftStorage;
+    private TextView craftWoodInstrumentText, craftStoneInstrumentText, craftFiberInstrumentText, craftFoodInstrumentText, craftBedText,craftStorageText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.craft_fragment, container, false);
+        //init images+texts
+        craftWoodInstrument = view.findViewById(R.id.craft_wood_instrument);
+        craftStoneInstrument = view.findViewById(R.id.craft_stone_instrument);
+        craftFiberInstrument = view.findViewById(R.id.craft_fiber_instrument);
+        craftFoodInstrument = view.findViewById(R.id.craft_food_instrument);
+        craftBed = view.findViewById(R.id.craft_bed);
+        craftStorage = view.findViewById(R.id.craft_storage);
 
-        craftStoneAxe = view.findViewById(R.id.craft_stone_axe);
-        craftStonePickaxe = view.findViewById(R.id.craft_stone_pickaxe);
-        craftStoneSickle = view.findViewById(R.id.craft_stone_sickle);
-        craftFiberBasket = view.findViewById(R.id.craft_fiber_basket);
+        craftWoodInstrumentText = view.findViewById(R.id.craft_wood_instrument_text);
+        craftStoneInstrumentText = view.findViewById(R.id.craft_stone_instrument_text);
+        craftFiberInstrumentText = view.findViewById(R.id.craft_fiber_instrument_text);
+        craftFoodInstrumentText = view.findViewById(R.id.craft_food_instrument_text);
+        craftBedText = view.findViewById(R.id.craft_bed_text);
+        craftStorageText = view.findViewById(R.id.craft_storage_text);
 
-        craftStoneAxeText = view.findViewById(R.id.craft_stone_axe_text);
-        craftStonePickaxeText = view.findViewById(R.id.craft_stone_pickaxe_text);
-        craftStoneSickleText = view.findViewById(R.id.craft_stone_sickle_text);
-        craftFiberBasketText = view.findViewById(R.id.craft_fiber_basket_text);
-
-        craftStoneAxe.setOnClickListener(new View.OnClickListener() {
+        craftWoodInstrument.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (((PlayActivity) getActivity()).getResourceList().get(woodIndex) >= 5 && ((PlayActivity) getActivity()).getResourceList().get(stoneIndex) >= 3 && ((PlayActivity) getActivity()).getResourceList().get(fiberIndex) >= 10 && ((PlayActivity) getActivity()).getResourceList().get(staminaIndex) >= 20) {
-                    ((PlayActivity) getActivity()).staminaAdd(-20);
-                    if (chance(0.8)) {
-                        craft(5, 3, 10, 0, 0, 0);
-                        ((PlayActivity) getActivity()).getResourceList().set(woodInstrumentIndex,1);
-                        craftStoneAxe.setVisibility(View.GONE);
-                        craftStoneAxeText.setVisibility(View.GONE);
-                    } else {
-                        ((PlayActivity) getActivity()).healthAdd(-5);
-                        Toast.makeText(getActivity(), "Nice try, but you have two left hands", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(getActivity(), "You need 5 woods, 3 stones, 10 fibers and 20 stamina", Toast.LENGTH_LONG).show();
+                switch (getWoodInstrument()) {
+                    case 0:
+                        if (isWood(5) && isStone(3) && isFiber(10) && isStamina(20)) {
+                            staminaAdd(-20);
+                            if (chance(0.8)) {
+                                craft(5, 3, 10, 0, 0, 0);
+                                ((PlayActivity) getActivity()).getBuildedList().set(getResources().getInteger(R.integer.WOOD_INDEX), 1);
+                                craftWoodInstrument.setVisibility(View.GONE);
+                                craftWoodInstrumentText.setVisibility(View.GONE);
+                            } else {
+                                healthAdd(-5);
+                                showSnackbar("Nice try, but you have two left hands");
+                            }
+                        } else {
+                            showSnackbar("You need 5 woods, 3 stones, 10 fibers and 20 stamina");
+                        }
+                        break;
                 }
             }
         });
-        craftStonePickaxe.setOnClickListener(new View.OnClickListener() {
+
+        craftStoneInstrument.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (((PlayActivity) getActivity()).getResourceList().get(woodIndex) >= 4 && ((PlayActivity) getActivity()).getResourceList().get(stoneIndex) >= 4 && ((PlayActivity) getActivity()).getResourceList().get(fiberIndex) >= 10 && ((PlayActivity) getActivity()).getResourceList().get(staminaIndex) >= 20) {
-                    ((PlayActivity) getActivity()).staminaAdd(-20);
-                    if (chance(0.8)) {
-                        craft(4, 4, 10, 0, 0, 0);
-                        ((PlayActivity) getActivity()).getResourceList().set(stoneInstrumentIndex,1);
-                        craftStonePickaxe.setVisibility(View.GONE);
-                        craftStonePickaxeText.setVisibility(View.GONE);
-                    } else {
-                        ((PlayActivity) getActivity()).healthAdd(-5);
-                        Toast.makeText(getActivity(), "Nice try, but you have two left hands", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(getActivity(), "You need 4 woods, 4 stones, 10 fibers and 20 stamina", Toast.LENGTH_LONG).show();
+                switch (getStoneInstrument()) {
+                    case 0:
+                        if (isWood(4) && isStone(4) && isFiber(10) && isStamina(20)) {
+                            staminaAdd(-20);
+                            if (chance(0.8)) {
+                                craft(4, 4, 10, 0, 0, 0);
+                                ((PlayActivity) getActivity()).getBuildedList().set(getResources().getInteger(R.integer.STONE_INSTRUMENT_INDEX), 1);
+                                craftStoneInstrument.setVisibility(View.GONE);
+                                craftStoneInstrumentText.setVisibility(View.GONE);
+                            } else {
+                                healthAdd(-5);
+                                showSnackbar("Nice try, but you have two left hands");
+                            }
+                        } else {
+                            showSnackbar("You need 4 woods, 4 stones, 10 fibers and 20 stamina");
+                        }
+                        break;
                 }
             }
         });
-        craftStoneSickle.setOnClickListener(new View.OnClickListener() {
+        craftFiberInstrument.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (((PlayActivity) getActivity()).getResourceList().get(woodIndex) >= 3 && ((PlayActivity) getActivity()).getResourceList().get(stoneIndex) >= 3 && ((PlayActivity) getActivity()).getResourceList().get(fiberIndex) >= 8 && ((PlayActivity) getActivity()).getResourceList().get(staminaIndex) >= 20) {
-                    ((PlayActivity) getActivity()).staminaAdd(-20);
-                    if (chance(0.8)) {
-                        craft(3, 3, 8, 0, 0, 0);
-                        ((PlayActivity) getActivity()).getResourceList().set(fiberInstrumentIndex,1);
-                        craftStoneSickle.setVisibility(View.GONE);
-                        craftStoneSickleText.setVisibility(View.GONE);
-                    } else {
-                        ((PlayActivity) getActivity()).healthAdd(-5);
-                        Toast.makeText(getActivity(), "Nice try, but you have two left hands", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(getActivity(), "You need 3 woods, 3 stones, 8 fibers and 20 stamina", Toast.LENGTH_LONG).show();
+                switch (getFiberInstrument()) {
+                    case 0:
+                        if (isWood(3) && isStone(3) && isFiber(8) && isStamina(20)) {
+                            staminaAdd(-20);
+                            if (chance(0.8)) {
+                                craft(3, 3, 8, 0, 0, 0);
+                                ((PlayActivity) getActivity()).getBuildedList().set(getResources().getInteger(R.integer.FIBER_INSTRUMENT_INDEX), 1);
+                                craftFiberInstrument.setVisibility(View.GONE);
+                                craftFiberInstrumentText.setVisibility(View.GONE);
+                            } else {
+                                healthAdd(-5);
+                                showSnackbar("Nice try, but you have two left hands");
+                            }
+                        } else {
+                            showSnackbar("You need 3 woods, 3 stones, 8 fibers and 20 stamina");
+                        }
+                        break;
                 }
             }
         });
-        craftFiberBasket.setOnClickListener(new View.OnClickListener() {
+        craftFoodInstrument.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (((PlayActivity) getActivity()).getResourceList().get(fiberIndex) >= 20 && ((PlayActivity) getActivity()).getResourceList().get(staminaIndex) >= 20) {
-                    staminaAdd(-20);
-                    if (chance(0.8)) {
-                        craft(0, 0, 20, 0, 0, 0);
-                        ((PlayActivity) getActivity()).getResourceList().set(foodInstrumentIndex,1);
-                        craftFiberBasket.setVisibility(View.GONE);
-                        craftFiberBasketText.setVisibility(View.GONE);
-                    } else {
-                        healthAdd(-5);
-                        Toast.makeText(getActivity(), "Nice try, but you have two left hands", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(getActivity(), "You need 20 fibers and 20 stamina", Toast.LENGTH_LONG).show();
+                switch (getFoodInstrument()) {
+                    case 0:
+                        if (isFiber(20) && isStamina(20)) {
+                            staminaAdd(-20);
+                            if (chance(0.8)) {
+                                craft(0, 0, 20, 0, 0, 0);
+                                ((PlayActivity) getActivity()).getBuildedList().set(getResources().getInteger(R.integer.FOOD_INSTRUMENT_INDEX), 1);
+                                craftFoodInstrument.setVisibility(View.GONE);
+                                craftFoodInstrumentText.setVisibility(View.GONE);
+                            } else {
+                                healthAdd(-5);
+                                showSnackbar("Nice try, but you have two left hands");
+                            }
+                        } else {
+                            showSnackbar("You need 20 fibers and 20 stamina");
+                        }
+                        break;
                 }
             }
         });
 
-        switch (getWoodInstrument()){
+        craftStorage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (getStorage()) {
+                    case 0:
+                        if (isWood(20)&&isFiber(15) && isStamina(20)) {
+                            staminaAdd(-20);
+                            if (chance(0.8)) {
+                                craft(20, 0, 15, 0, 0, 0);
+                                ((PlayActivity) getActivity()).getBuildedList().set(getResources().getInteger(R.integer.STORAGE_INDEX), 1);
+                                craftStorage.setVisibility(View.GONE);
+                                craftStorageText.setVisibility(View.GONE);
+                            } else {
+                                healthAdd(-5);
+                                showSnackbar("Nice try, but you have two left hands");
+                            }
+                        } else {
+                            showSnackbar("You need 20 wood, 15 fibers and 20 stamina");
+                        }
+                        break;
+                }
+            }
+        });
+
+        craftBed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (getBed()) {
+                    case 0:
+                        if (isWood(30)&&isFiber(40) && isStamina(50)) {
+                            staminaAdd(-50);
+                            if (chance(0.8)) {
+                                craft(30, 0, 40, 0, 0, 0);
+                                ((PlayActivity) getActivity()).getBuildedList().set(getResources().getInteger(R.integer.BED_INDEX), 1);
+                                craftBed.setVisibility(View.GONE);
+                                craftBedText.setVisibility(View.GONE);
+                            } else {
+                                healthAdd(-5);
+                                showSnackbar("Nice try, but you have two left hands");
+                            }
+                        } else {
+                            showSnackbar("You need 30 wood, 40 fibers and 50 stamina");
+                        }
+                        break;
+                }
+            }
+        });
+
+        //switches of lvl of instrument
+        switch (getWoodInstrument()) {
             case 1:
-              craftStoneAxe.setVisibility(View.GONE);
-              craftStoneAxeText.setVisibility(View.GONE);
+                craftWoodInstrument.setVisibility(View.GONE);
+                craftWoodInstrumentText.setVisibility(View.GONE);
+                break;
+        }
+        switch (getStoneInstrument()) {
+            case 1:
+                craftStoneInstrument.setVisibility(View.GONE);
+                craftStoneInstrumentText.setVisibility(View.GONE);
+                break;
+        }
+        switch (getFiberInstrument()) {
+            case 1:
+                craftFiberInstrument.setVisibility(View.GONE);
+                craftFiberInstrumentText.setVisibility(View.GONE);
+                break;
 
         }
-        switch (getStoneInstrument()){
+        switch (getFoodInstrument()) {
             case 1:
-                craftStonePickaxe.setVisibility(View.GONE);
-                craftStonePickaxeText.setVisibility(View.GONE);
-
+                craftFoodInstrument.setVisibility(View.GONE);
+                craftFoodInstrumentText.setVisibility(View.GONE);
+                break;
         }
-        switch (getFiberInstrument()){
+        switch (getBed()) {
             case 1:
-                craftStoneSickle.setVisibility(View.GONE);
-                craftStoneSickleText.setVisibility(View.GONE);
-
-
-        }
-        switch (getFoodInstrument()){
-            case 1:
-                craftFiberBasket.setVisibility(View.GONE);
-                craftFiberBasketText.setVisibility(View.GONE);
+                craftBed.setVisibility(View.GONE);
+                craftBedText.setVisibility(View.GONE);
+                break;
         }
 
-
-
-
-
-
-
+        switch (getStorage()) {
+            case 1:
+                craftStorage.setVisibility(View.GONE);
+                craftStorageText.setVisibility(View.GONE);
+                break;
+        }
 
 
         return view;
@@ -174,55 +239,65 @@ public class CraftFragment extends Fragment {
             return false;
     }
 
-    private int getWood(){
-        return ((PlayActivity)getActivity()).getResourceList().get(woodIndex);
-    }
-    private int getStone(){
-        return ((PlayActivity)getActivity()).getResourceList().get(stoneIndex);
-    }
-    private int getFiber(){
-        return ((PlayActivity)getActivity()).getResourceList().get(fiberIndex);
-    }
-    private int getFood(){
-        return ((PlayActivity)getActivity()).getResourceList().get(foodIndex);
-    }
-    private int getHealth(){
-        return ((PlayActivity)getActivity()).getResourceList().get(healthIndex);
-    }
-    private int getStamina(){
-        return ((PlayActivity)getActivity()).getResourceList().get(staminaIndex);
+    private int getWood() {
+        return ((PlayActivity) getActivity()).getResourceList().get(getResources().getInteger(R.integer.WOOD_INDEX));
     }
 
-    public int getWoodInstrument() {
-        int woodInstrument;
-
-        woodInstrument = ((PlayActivity) getActivity()).getResourceList().get(woodInstrumentIndex);
-
-        return woodInstrument;
+    private int getStone() {
+        return ((PlayActivity) getActivity()).getResourceList().get(getResources().getInteger(R.integer.STONE_INDEX));
     }
 
-    public int getFoodInstrument() {
+    private int getFiber() {
+        return ((PlayActivity) getActivity()).getResourceList().get(getResources().getInteger(R.integer.FIBER_INDEX));
+    }
+
+    private int getFood() {
+        return ((PlayActivity) getActivity()).getResourceList().get(getResources().getInteger(R.integer.FOOD_INDEX));
+    }
+
+    private int getHealth() {
+        return ((PlayActivity) getActivity()).getResourceList().get(getResources().getInteger(R.integer.HEALTH_INDEX));
+    }
+
+    private int getStamina() {
+        return ((PlayActivity) getActivity()).getResourceList().get(getResources().getInteger(R.integer.STAMINA_INDEX));
+    }
+
+    private int getWoodInstrument() {
+
+        return ((PlayActivity) getActivity()).getBuildedList().get(getResources().getInteger(R.integer.WOOD_INSTRUMENT_INDEX));
+    }
+
+    private int getFoodInstrument() {
         int foodInstrument;
 
-        foodInstrument = ((PlayActivity) getActivity()).getResourceList().get(foodInstrumentIndex);
+        foodInstrument = ((PlayActivity) getActivity()).getBuildedList().get(getResources().getInteger(R.integer.FOOD_INSTRUMENT_INDEX));
 
         return foodInstrument;
     }
 
-    public int getFiberInstrument() {
+    private int getFiberInstrument() {
         int fiberInstrument;
 
-        fiberInstrument = ((PlayActivity) getActivity()).getResourceList().get(fiberInstrumentIndex);
+        fiberInstrument = ((PlayActivity) getActivity()).getBuildedList().get(getResources().getInteger(R.integer.FIBER_INSTRUMENT_INDEX));
 
         return fiberInstrument;
     }
 
-    public int getStoneInstrument() {
+    private int getStoneInstrument() {
         int stoneInstrument;
 
-        stoneInstrument = ((PlayActivity) getActivity()).getResourceList().get(stoneInstrumentIndex);
+        stoneInstrument = ((PlayActivity) getActivity()).getBuildedList().get(getResources().getInteger(R.integer.STONE_INSTRUMENT_INDEX));
 
         return stoneInstrument;
+    }
+
+    private int getBed() {
+        return ((PlayActivity) getActivity()).getBuildedList().get(getResources().getInteger(R.integer.BED_INDEX));
+    }
+
+    private int getStorage() {
+        return ((PlayActivity) getActivity()).getBuildedList().get(getResources().getInteger(R.integer.STORAGE_INDEX));
     }
 
     private void woodAdd(int value) {
@@ -247,5 +322,51 @@ public class CraftFragment extends Fragment {
 
     private void healthAdd(int value) {
         ((PlayActivity) getActivity()).healthAdd(value);
+    }
+
+    private boolean isWood(int valueToCraft) {
+        if (getWood() >= valueToCraft)
+            return true;
+        else
+            return false;
+    }
+
+    private boolean isStone(int valueToCraft) {
+        if (getStone() >= valueToCraft)
+            return true;
+        else
+            return false;
+    }
+
+    private boolean isFiber(int valueToCraft) {
+        if (getFiber() >= valueToCraft)
+            return true;
+        else
+            return false;
+    }
+
+    private boolean isFood(int valueToCraft) {
+        if (getFood() >= valueToCraft)
+            return true;
+        else
+            return false;
+    }
+
+    private boolean isStamina(int valueToCraft) {
+        if (getStamina() >= valueToCraft)
+            return true;
+        else
+            return false;
+    }
+
+    private boolean isHealth(int valueToCraft) {
+        if (getHealth() >= valueToCraft)
+            return true;
+        else
+            return false;
+    }
+
+    private void showSnackbar(String text) {
+        ((PlayActivity) getActivity()).showSnackbar(text, 1500);
     }
 }

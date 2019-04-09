@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import luckycoolgames.mygame.Adapters.StorageRecyclerAdapter;
 import luckycoolgames.mygame.Adapters.RecyclerViewData;
-import luckycoolgames.mygame.PlayActivity;
+import luckycoolgames.mygame.Activities.PlayActivity;
 import luckycoolgames.mygame.R;
 
 public class StorageFragment extends Fragment {
@@ -23,11 +23,6 @@ public class StorageFragment extends Fragment {
             R.drawable.food_icon
     };
     private String[] texts;
-
-    private int woodIndex = 0;
-    private int stoneIndex = 1;
-    private int fiberIndex = 2;
-    private int foodIndex = 3;
 
     RecyclerViewData data = new RecyclerViewData();
 
@@ -42,7 +37,7 @@ public class StorageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.storage_fragment, container, false);
         recyclerView = view.findViewById(R.id.storageRecycleView);
-        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerAdapter = new StorageRecyclerAdapter(storageImages, texts);

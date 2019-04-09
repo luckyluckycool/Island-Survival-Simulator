@@ -7,172 +7,204 @@
     android:orientation="horizontal">
 
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="horizontal"
 
+        >
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/gather_buttons"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
-            >
             <LinearLayout
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/action_buttons_fragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/gather_wood_button"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:background="@drawable/hand_gathering" />
+                <ImageView
+                    android:id="@+id/gather_wood_button"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:background="@drawable/hand_gathering" />
 
-            <TextView
-                android:id="@+id/gather_wood_text"
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:text="Gather sticks"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-        <ImageView
-            android:id="@+id/gather_stone_button"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_marginStart="50dp"
-            android:background="@drawable/hand_gathering" />
-            <TextView
-                android:id="@+id/gather_stone_text"
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:text="Gather stones"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-        <ImageView
-            android:id="@+id/gather_fiber_button"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_marginStart="50dp"
-            android:background="@drawable/hand_gathering" />
-            <TextView
-                android:id="@+id/gather_fiber_text"
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:text="Gather fiber"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-        <ImageView
-            android:id="@+id/gather_food_button"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_marginStart="50dp"
-            android:background="@drawable/hand_gathering" />
-            <TextView
-                android:id="@+id/gather_food_text"
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:text="Gather food"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-    </LinearLayout>
-                <LinearLayout
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/gather_wood_text"
+                    android:layout_width="85dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
-                        android:layout_marginStart="50dp"
-                        android:background="@drawable/hand_gathering" />
-                    <TextView
-                        android:layout_width="85dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="50dp"
-                        android:text="Gather food"
-                        android:textAlignment="center"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-                <LinearLayout
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
-                        android:layout_marginStart="50dp"
-                        android:background="@drawable/hand_gathering" />
-                    <TextView
-                        android:layout_width="85dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="50dp"
-                        android:text="Gather food"
-                        android:textAlignment="center"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-                <LinearLayout
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
-                        android:layout_marginStart="50dp"
-                        android:background="@drawable/hand_gathering" />
-                    <TextView
-                        android:layout_width="85dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="50dp"
-                        android:text="Gather food"
-                        android:textAlignment="center"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-
+                    android:text="Gather sticks"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
             </LinearLayout>
-        </HorizontalScrollView>
-<!--<android.support.v7.widget.RecyclerView
-        android:id="@+id/gatherRecycleView"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>-->
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/gather_stone_button"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:background="@drawable/hand_gathering" />
+
+                <TextView
+                    android:id="@+id/gather_stone_text"
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="Gather stones"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/gather_fiber_button"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:background="@drawable/hand_gathering" />
+
+                <TextView
+                    android:id="@+id/gather_fiber_text"
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="Gather fiber"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/gather_food_button"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:background="@drawable/hand_gathering" />
+
+                <TextView
+                    android:id="@+id/gather_food_text"
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="Gather food"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+                    <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:background="@drawable/hand_gathering" />
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="Gather food"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+                    <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:background="@drawable/hand_gathering" />
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="Gather food"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+                    <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:background="@drawable/hand_gathering" />
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="Gather food"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+                    <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:background="@drawable/hand_gathering" />
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="Gather food"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+    <!--<android.support.v7.widget.RecyclerView
+            android:id="@+id/gatherRecycleView"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>-->
+
+</LinearLayout>

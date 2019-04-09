@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import luckycoolgames.mygame.PlayActivity;
+import luckycoolgames.mygame.Activities.PlayActivity;
 import luckycoolgames.mygame.R;
 import luckycoolgames.mygame.fragments.GatherFragment;
 

@@ -11,22 +11,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:theme="@style/SplashTheme"
+            android:name=".Activities.MainActivity"
             android:noHistory="true"
             android:screenOrientation="userLandscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/SplashTheme"
+            android:name=".Activities.PlayActivity"
             android:noHistory="false"
-            android:name=".PlayActivity"
-            android:screenOrientation="userLandscape" >
-
-        </activity>
-
+            android:screenOrientation="userLandscape"></activity>
     </application>
 
 </manifest>

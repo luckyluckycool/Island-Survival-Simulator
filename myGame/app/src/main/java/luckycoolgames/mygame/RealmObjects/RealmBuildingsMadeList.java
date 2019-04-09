@@ -1,4 +1,3 @@
-/*
 package luckycoolgames.mygame.RealmObjects;
 
 import java.util.List;
@@ -18,4 +17,3 @@ public class RealmBuildingsMadeList extends RealmObject {
         list.addAll(arrayList);
     }
 }
-*/

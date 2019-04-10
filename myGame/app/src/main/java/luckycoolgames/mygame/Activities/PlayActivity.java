@@ -26,7 +26,7 @@ import luckycoolgames.mygame.RealmObjects.RealmResourceList;
 import luckycoolgames.mygame.fragments.ActionFragment;
 import luckycoolgames.mygame.fragments.GatherFragment;
 import luckycoolgames.mygame.fragments.CraftFragment;
-import luckycoolgames.mygame.fragments.StorageFragment;
+//import luckycoolgames.mygame.fragments.StorageFragment;
 
 public class PlayActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -394,10 +394,6 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
             return true;
         else
             return false;
-    }
-
-    @Override
-    public void onBackPressed() {
     }
 
     public void showSnackbar(String text, int duration) {

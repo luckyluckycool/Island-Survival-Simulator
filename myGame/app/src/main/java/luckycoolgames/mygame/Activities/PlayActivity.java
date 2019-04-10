@@ -27,6 +27,7 @@ import luckycoolgames.mygame.RealmObjects.RealmResourceList;
 import luckycoolgames.mygame.fragments.ActionFragment;
 import luckycoolgames.mygame.fragments.GatherFragment;
 import luckycoolgames.mygame.fragments.CraftFragment;
+import luckycoolgames.mygame.fragments.SleepFragment;
 //import luckycoolgames.mygame.fragments.StorageFragment;
 
 public class PlayActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -45,7 +46,7 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
 
     Realm realm = new MainActivity().getRealm();
 
-    private BottomNavigationView bottomNavigationView;
+    public BottomNavigationView bottomNavigationView;
 
     //init textViews
     private TextView wood_text, stone_text, fiber_text, food_text, health_text, stamina_text;
@@ -231,7 +232,7 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
                 }
             }, 5000);*/
 
-            sleepImage.setVisibility(View.VISIBLE);
+            /*sleepImage.setVisibility(View.VISIBLE);
             sleepImage.bringToFront();
             sleepTimer.setVisibility(View.VISIBLE);
             sleepTimer.bringToFront();
@@ -248,7 +249,12 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
                     healthAdd(5);
                     staminaAdd(10);
                 }
-            }.start();
+            }.start();*/
+
+            SleepFragment sleepFragment = SleepFragment.newInstance(180);
+            sleepFragment.show(fragmentManager, "");
+
+           // fragmentManager.beginTransaction().replace(R.id.coordinator, ).commit();
 
         } else {
             if (resourceList.get(getResources().getInteger(R.integer.STAMINA_INDEX)) + value > 100)
@@ -385,8 +391,8 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
         stone_text.setText(resourceList.get(getResources().getInteger(R.integer.STONE_INDEX)).toString());
         fiber_text.setText(resourceList.get(getResources().getInteger(R.integer.FIBER_INDEX)).toString());
         food_text.setText(resourceList.get(getResources().getInteger(R.integer.FOOD_INDEX)).toString());
-        stamina_text.setText(resourceList.get(getResources().getInteger(R.integer.HEALTH_INDEX)).toString());
-        health_text.setText(resourceList.get(getResources().getInteger(R.integer.STAMINA_INDEX)).toString());
+        health_text.setText(resourceList.get(getResources().getInteger(R.integer.HEALTH_INDEX)).toString());
+        stamina_text.setText(resourceList.get(getResources().getInteger(R.integer.STAMINA_INDEX)).toString());
     }
 
     @Override

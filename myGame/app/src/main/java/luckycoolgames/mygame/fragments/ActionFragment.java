@@ -56,7 +56,9 @@ public class ActionFragment extends Fragment {
 
                 switch (getBed()) {
                     case 1:
+
                         ((PlayActivity)getActivity()).sleepImage.setVisibility(View.VISIBLE);
+                        ((PlayActivity)getActivity()).bottomNavigationView.setVisibility(View.GONE);
                         ((PlayActivity)getActivity()).sleepImage.bringToFront();
                         ((PlayActivity)getActivity()).sleepTimer.bringToFront();
                         new CountDownTimer(60000,1000) {
@@ -69,6 +71,7 @@ public class ActionFragment extends Fragment {
                             public void onFinish() {
                                 ((PlayActivity)getActivity()).sleepTimer.setVisibility(View.GONE);
                                 ((PlayActivity)getActivity()).sleepImage.setVisibility(View.GONE);
+                                ((PlayActivity)getActivity()).bottomNavigationView.setVisibility(View.VISIBLE);
                                 healthAdd(25);
                                 staminaAdd(50);
                             }

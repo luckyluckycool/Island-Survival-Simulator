@@ -57,6 +57,8 @@ public class ActionFragment extends Fragment {
                 switch (getBed()) {
                     case 1:
                         ((PlayActivity)getActivity()).sleepImage.setVisibility(View.VISIBLE);
+                        ((PlayActivity)getActivity()).sleepImage.bringToFront();
+                        ((PlayActivity)getActivity()).sleepTimer.bringToFront();
                         new CountDownTimer(60000,1000) {
                             @Override
                             public void onTick(long millisUntilFinished) {

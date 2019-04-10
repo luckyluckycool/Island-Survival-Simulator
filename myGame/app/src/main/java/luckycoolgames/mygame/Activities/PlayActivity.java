@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -216,9 +217,9 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
 
         if (resourceList.get(getResources().getInteger(R.integer.STAMINA_INDEX)) + value <= 0) {
             bottomNavigationView.setVisibility(View.GONE);
-            youDied.setVisibility(View.VISIBLE);
-            youDied.bringToFront();
-            handler.postDelayed(new Runnable() {
+            //youDied.setVisibility(View.VISIBLE);
+            //youDied.bringToFront();
+            /*handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     realm.beginTransaction();
@@ -228,7 +229,26 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
                     startActivity(intent);
                     finish();
                 }
-            }, 5000);
+            }, 5000);*/
+
+            sleepImage.setVisibility(View.VISIBLE);
+            sleepImage.bringToFront();
+            sleepTimer.setVisibility(View.VISIBLE);
+            sleepTimer.bringToFront();
+            new CountDownTimer(180000,1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    sleepTimer.setText(""+millisUntilFinished/1000);
+                }
+
+                @Override
+                public void onFinish() {
+                    sleepTimer.setVisibility(View.GONE);
+                    sleepImage.setVisibility(View.GONE);
+                    healthAdd(5);
+                    staminaAdd(10);
+                }
+            }.start();
 
         } else {
             if (resourceList.get(getResources().getInteger(R.integer.STAMINA_INDEX)) + value > 100)

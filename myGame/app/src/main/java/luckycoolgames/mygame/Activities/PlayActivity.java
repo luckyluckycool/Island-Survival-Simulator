@@ -275,9 +275,9 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.action_button:
                 fragment = new ActionFragment();
                 break;
-            case R.id.storage_button:
+            /*case R.id.storage_button:
                 fragment = new StorageFragment();
-                break;
+                break;*/
         }
         return loadFragment(fragment);
     }

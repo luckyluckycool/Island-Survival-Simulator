@@ -18,12 +18,12 @@
         android:title="ACTION"
         android:icon="@drawable/ic_action"
         />
-    <item
+    <!--<item
         android:id="@+id/storage_button"
         android:enabled="true"
         android:title="STORAGE"
         android:icon="@drawable/ic_storage"
         android:visible="true"
-        />
+        />-->
 
 </menu>

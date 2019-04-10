@@ -1,16 +1,19 @@
+/*
 package luckycoolgames.mygame.Adapters;
 
 import luckycoolgames.mygame.R;
 
 public class RecyclerViewData {
 
-   /* public String[] storageTexts = {
+   */
+/* public String[] storageTexts = {
 
             getTextFromList(1),
             getTextFromList(1),
             getTextFromList(2),
             getTextFromList(3)
-    };*/
+    };*//*
+
 
 
 
@@ -124,3 +127,4 @@ public class RecyclerViewData {
 
 
 }
+*/

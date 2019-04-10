@@ -1,3 +1,4 @@
+/*
 package luckycoolgames.mygame.fragments;
 
 import android.app.Fragment;
@@ -58,3 +59,4 @@ public class StorageFragment extends Fragment {
     }
 
 }
+*/

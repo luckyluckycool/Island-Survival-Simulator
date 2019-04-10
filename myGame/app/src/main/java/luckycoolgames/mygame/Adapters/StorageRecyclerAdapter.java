@@ -1,3 +1,4 @@
+/*
 package luckycoolgames.mygame.Adapters;
 
 import android.support.v7.widget.RecyclerView;
@@ -55,3 +56,4 @@ public class StorageRecyclerAdapter extends RecyclerView.Adapter<StorageRecycler
         }
     }
 }
+*/

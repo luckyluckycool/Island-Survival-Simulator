@@ -79,7 +79,6 @@ public class ActionFragment extends Fragment {
             }
         });
 
-
         return view;
 
 

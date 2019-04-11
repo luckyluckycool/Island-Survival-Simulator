@@ -100,6 +100,8 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
         realm = Realm.getDefaultInstance();
         realm.compactRealm(Realm.getDefaultConfiguration());
 
+
+
         if(!realm.isEmpty()&&isTimeInRealm()){
             SleepFragment sleepFragment = SleepFragment.newInstance(sleepFromRealm());
             sleepFragment.show(fragmentManager, "");}
@@ -107,9 +109,10 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
 
         if (!realm.isEmpty())
             allFromRealm();
-        else
+        else {
             newGameSetList();
-
+            sleepTimeToRealm(0);
+        }
         setTextsFromList();
 
 

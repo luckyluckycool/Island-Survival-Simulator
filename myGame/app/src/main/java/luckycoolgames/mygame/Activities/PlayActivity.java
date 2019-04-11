@@ -24,6 +24,7 @@ import io.realm.Realm;
 import luckycoolgames.mygame.R;
 import luckycoolgames.mygame.RealmObjects.RealmBuildingsMadeList;
 import luckycoolgames.mygame.RealmObjects.RealmResourceList;
+import luckycoolgames.mygame.RealmObjects.RealmSleep;
 import luckycoolgames.mygame.fragments.ActionFragment;
 import luckycoolgames.mygame.fragments.GatherFragment;
 import luckycoolgames.mygame.fragments.CraftFragment;
@@ -96,9 +97,14 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         //      realm = Realm.getDefaultInstance();
-
         realm = Realm.getDefaultInstance();
         realm.compactRealm(Realm.getDefaultConfiguration());
+
+        if(!realm.isEmpty()&&isTimeInRealm()){
+            SleepFragment sleepFragment = SleepFragment.newInstance(sleepFromRealm());
+            sleepFragment.show(fragmentManager, "");}
+
+
         if (!realm.isEmpty())
             allFromRealm();
         else
@@ -106,9 +112,13 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
 
         setTextsFromList();
 
+
         loadFragment(new GatherFragment());
 
+
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+
+
     }
 
 
@@ -187,7 +197,9 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-
+                    realm.beginTransaction();
+                    realm.deleteAll();
+                    realm.commitTransaction();
                     Intent intent = new Intent(PlayActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -217,7 +229,7 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
     public void staminaAdd(int value) {
 
         if (resourceList.get(getResources().getInteger(R.integer.STAMINA_INDEX)) + value <= 0) {
-            bottomNavigationView.setVisibility(View.GONE);
+            //bottomNavigationView.setVisibility(View.GONE);
             //youDied.setVisibility(View.VISIBLE);
             //youDied.bringToFront();
             /*handler.postDelayed(new Runnable() {
@@ -250,11 +262,12 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
                     staminaAdd(10);
                 }
             }.start();*/
-
-            SleepFragment sleepFragment = SleepFragment.newInstance(180);
+            resourceList.set(getResources().getInteger(R.integer.STAMINA_INDEX), resourceList.get(getResources().getInteger(R.integer.STAMINA_INDEX)) + value);
+            setAllToRealm();
+            SleepFragment sleepFragment = SleepFragment.newInstance(20*1000);
             sleepFragment.show(fragmentManager, "");
 
-           // fragmentManager.beginTransaction().replace(R.id.coordinator, ).commit();
+            // fragmentManager.beginTransaction().replace(R.id.coordinator, ).commit();
 
         } else {
             if (resourceList.get(getResources().getInteger(R.integer.STAMINA_INDEX)) + value > 100)
@@ -333,9 +346,18 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
         realm.commitTransaction();
     }
 
+    public void sleepTimeToRealm(long time) {
+        realm.beginTransaction();
+        RealmSleep realmSleep = realm.createObject(RealmSleep.class);
+        realmSleep.setTimeLeft(time);
+        realm.commitTransaction();
+    }
+
+
     public void setAllToRealm() {
         resourcesToRealm(resourceList);
         buildingsToRealm(buildedList);
+        //sleepTimeToRealm(timeLeft());
     }
 
 
@@ -361,6 +383,27 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
         } else
             realm.cancelTransaction();
         return list;
+    }
+
+    public boolean isTimeInRealm() {
+        long temp;
+        RealmSleep realmSleep = realm.where(RealmSleep.class).findAllAsync().last();
+        realm.beginTransaction();
+        temp = realmSleep.getTimeLeft();
+        realm.commitTransaction();
+        if (temp !=0) {
+            return true;
+        } else
+            return false;
+    }
+
+    public long sleepFromRealm() {
+        long temp;
+        RealmSleep realmSleep = realm.where(RealmSleep.class).findAllAsync().last();
+        realm.beginTransaction();
+        temp = realmSleep.getTimeLeft();
+        realm.commitTransaction();
+        return temp;
     }
 
     public void allFromRealm() {
@@ -405,6 +448,7 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
 
     }
 
+
     //onDestroy
     @Override
     protected void onDestroy() {
@@ -429,5 +473,16 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
 
     private void showSnackbar(String text) {
         Snackbar.make(coordinatorLayout, text, 400).show();
+    }
+
+    public Realm getRealm() {
+        return realm;
+    }
+
+    private long timeLeft() {
+        long time;
+        SleepFragment sleepFragment = new SleepFragment();
+        time =sleepFragment.getTimeLeft();
+        return time;
     }
 }

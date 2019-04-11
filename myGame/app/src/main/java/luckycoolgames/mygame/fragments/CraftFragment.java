@@ -353,14 +353,14 @@ public class CraftFragment extends Fragment {
     }
 
     private boolean isStamina(int valueToCraft) {
-        if (getStamina() >= valueToCraft)
+        if (getStamina() > valueToCraft)
             return true;
         else
             return false;
     }
 
     private boolean isHealth(int valueToCraft) {
-        if (getHealth() >= valueToCraft)
+        if (getHealth() > valueToCraft)
             return true;
         else
             return false;

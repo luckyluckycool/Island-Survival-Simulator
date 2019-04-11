@@ -43,10 +43,6 @@ public class MainActivity extends AppCompatActivity {
                 continueGame.setVisibility(View.GONE);
                 newGame.animate().scaleX((float) 0).scaleY((float) 0).setDuration(1000).start();
 
-                Intent intent = new Intent(MainActivity.this, PlayActivity.class);
-                startActivity(intent);
-
-
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {

@@ -1,18 +1,18 @@
 package luckycoolgames.mygame.fragments;
 
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import luckycoolgames.mygame.Activities.PlayActivity;
+
+import luckycoolgames.mygame.activities.PlayActivity;
 import luckycoolgames.mygame.R;
+import luckycoolgames.mygame.dialogs.SleepDialog;
 
 public class ActionFragment extends Fragment {
 
@@ -24,7 +24,7 @@ public class ActionFragment extends Fragment {
 
     //resource Indexes
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.action_fragment, container, false);
 
 
@@ -56,26 +56,8 @@ public class ActionFragment extends Fragment {
 
                 switch (getBed()) {
                     case 1:
-
-                        ((PlayActivity)getActivity()).sleepImage.setVisibility(View.VISIBLE);
-                        ((PlayActivity)getActivity()).bottomNavigationView.setVisibility(View.GONE);
-                        ((PlayActivity)getActivity()).sleepImage.bringToFront();
-                        ((PlayActivity)getActivity()).sleepTimer.bringToFront();
-                        new CountDownTimer(60000,1000) {
-                            @Override
-                            public void onTick(long millisUntilFinished) {
-                                ((PlayActivity)getActivity()).sleepTimer.setText(""+millisUntilFinished/1000);
-                            }
-
-                            @Override
-                            public void onFinish() {
-                                ((PlayActivity)getActivity()).sleepTimer.setVisibility(View.GONE);
-                                ((PlayActivity)getActivity()).sleepImage.setVisibility(View.GONE);
-                                ((PlayActivity)getActivity()).bottomNavigationView.setVisibility(View.VISIBLE);
-                                healthAdd(25);
-                                staminaAdd(50);
-                            }
-                        }.start();
+                        SleepDialog sleep = SleepDialog.newInstance(180*1000L);
+                        sleep.show(getFragmentManager(), "");
 
                         break;
                 }
@@ -195,6 +177,6 @@ public class ActionFragment extends Fragment {
     }
 
     private void showSnackbar(String text) {
-        ((PlayActivity) getActivity()).showSnackbar(text, 500);
+        ((PlayActivity) getActivity()).showSnackbar(text, 800);
     }
 }

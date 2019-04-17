@@ -9,30 +9,29 @@
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="horizontal">
+        android:scrollbars="horizontal"
+        >
 
         <LinearLayout
+            android:gravity="center"
             android:id="@+id/craft_fragment"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
             <LinearLayout
+                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_marginStart="50dp"
-
                     android:id="@+id/craft_wood_instrument"
                     android:layout_width="85dp"
                     android:layout_height="85dp"
                     android:background="@drawable/stone_axe_icon" />
 
                 <TextView
-                    android:layout_marginStart="50dp"
 
                     android:id="@+id/craft_wood_instrument_text"
                     android:layout_width="85dp"
@@ -45,6 +44,9 @@
             </LinearLayout>
 
             <LinearLayout
+
+                android:layout_gravity="center"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -71,6 +73,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_gravity="center"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -96,6 +100,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_gravity="center"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -122,6 +128,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_gravity="center"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -147,6 +155,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_gravity="center"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -171,7 +181,7 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <LinearLayout
+                <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -196,7 +206,7 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <LinearLayout
+                <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"

@@ -2,17 +2,16 @@ package luckycoolgames.mygame.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import luckycoolgames.mygame.activities.PlayActivity;
+import luckycoolgames.mygame.R;
 
 //import luckycoolgames.mygame.Adapters.GatherRecycleAdapter;
-import luckycoolgames.mygame.Activities.PlayActivity;
-import luckycoolgames.mygame.R;
 
 public class GatherFragment extends Fragment {
     //RecyclerViewData data = new RecyclerViewData();
@@ -38,6 +37,7 @@ public class GatherFragment extends Fragment {
         gatherFoodText = view.findViewById(R.id.gather_food_text);
 
         //setting resources
+        
         switch (getWoodInstrument()) {
             case 0:
                 gatherWood.setBackgroundResource(R.drawable.hand_gathering);
@@ -56,7 +56,7 @@ public class GatherFragment extends Fragment {
                 break;
             case 1:
                 gatherStone.setBackgroundResource(R.drawable.stone_pickaxe_icon);
-                gatherStoneText.setText("Pick stone with pickaxe");
+                gatherStoneText.setText("Pick stone");
                 break;
         }
         switch (getFiberInstrument()) {

@@ -4,7 +4,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.PlayActivity">
+    tools:context=".activities.PlayActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/storageRecycleView"

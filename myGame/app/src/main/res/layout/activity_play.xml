@@ -5,7 +5,7 @@
     android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.PlayActivity">
+    tools:context=".activities.PlayActivity">
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/mb_play"
         android:orientation="horizontal"
-        tools:context=".Activities.PlayActivity">
+        tools:context = ".activities.PlayActivity">
 
         <ImageView
             android:id="@+id/you_died"

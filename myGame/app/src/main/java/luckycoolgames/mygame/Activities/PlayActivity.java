@@ -1,10 +1,10 @@
-package luckycoolgames.mygame.Activities;
+package luckycoolgames.mygame.activities;
 
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.CountDownTimer;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -28,7 +28,7 @@ import luckycoolgames.mygame.RealmObjects.RealmSleep;
 import luckycoolgames.mygame.fragments.ActionFragment;
 import luckycoolgames.mygame.fragments.GatherFragment;
 import luckycoolgames.mygame.fragments.CraftFragment;
-import luckycoolgames.mygame.fragments.SleepFragment;
+import luckycoolgames.mygame.dialogs.SleepDialog;
 //import luckycoolgames.mygame.fragments.StorageFragment;
 
 public class PlayActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -71,6 +71,7 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
 
     private List<Integer> buildedList = new ArrayList<>();
 
+    private MediaPlayer player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,22 +97,29 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
+
         //      realm = Realm.getDefaultInstance();
         realm = Realm.getDefaultInstance();
         realm.compactRealm(Realm.getDefaultConfiguration());
 
+        if (!realm.isEmpty() && isTimeInRealm()) {
+            DialogFragment dialogFragment = SleepDialog.newInstance(sleepFromRealm());
+            dialogFragment.show(fragmentManager, "");
+            getPlayer();
+            stopPlayer();
+        }
 
 
-        if(!realm.isEmpty()&&isTimeInRealm()){
-            SleepFragment sleepFragment = SleepFragment.newInstance(sleepFromRealm());
-            sleepFragment.show(fragmentManager, "");}
-
-
-        if (!realm.isEmpty())
+        if (!realm.isEmpty()) {
             allFromRealm();
-        else {
+            getPlayer();
+            startPlayer();
+        } else {
+            getPlayer();
+            startPlayer();
             newGameSetList();
             sleepTimeToRealm(0);
+
         }
         setTextsFromList();
 
@@ -121,7 +129,13 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
-
+        if (isTimeInRealm()) {
+            getPlayer();
+            stopPlayer();
+        } else {
+            getPlayer();
+            startPlayer();
+        }
     }
 
 
@@ -196,13 +210,12 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
         if (resourceList.get(getResources().getInteger(R.integer.HEALTH_INDEX)) + value <= 0) {
             youDied.setVisibility(View.VISIBLE);
             youDied.bringToFront();
-
+            bottomNavigationView.setVisibility(View.GONE);
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    realm.beginTransaction();
-                    realm.deleteAll();
-                    realm.commitTransaction();
+                    realm.close();
+                    Realm.deleteRealm(Realm.getDefaultConfiguration());
                     Intent intent = new Intent(PlayActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -267,7 +280,7 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
             }.start();*/
             resourceList.set(getResources().getInteger(R.integer.STAMINA_INDEX), resourceList.get(getResources().getInteger(R.integer.STAMINA_INDEX)) + value);
             setAllToRealm();
-            SleepFragment sleepFragment = SleepFragment.newInstance(20*1000);
+            SleepDialog sleepFragment = SleepDialog.newInstance(45 * 1000);
             sleepFragment.show(fragmentManager, "");
 
             // fragmentManager.beginTransaction().replace(R.id.coordinator, ).commit();
@@ -334,18 +347,18 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
 
 
     //realm methods
-    public void resourcesToRealm(List<Integer> list) {
+    public void resourcesToRealm() {
         realm.beginTransaction();
         realmResourceList = realm.createObject(RealmResourceList.class);
-        realmResourceList.setList(list);
+        realmResourceList.setList(resourceList);
         realm.commitTransaction();
 
     }
 
-    public void buildingsToRealm(List<Integer> list) {
+    public void buildingsToRealm() {
         realm.beginTransaction();
         realmBuildingsMadeList = realm.createObject(RealmBuildingsMadeList.class);
-        realmBuildingsMadeList.setList(list);
+        realmBuildingsMadeList.setList(buildedList);
         realm.commitTransaction();
     }
 
@@ -358,9 +371,8 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
 
 
     public void setAllToRealm() {
-        resourcesToRealm(resourceList);
-        buildingsToRealm(buildedList);
-        //sleepTimeToRealm(timeLeft());
+        resourcesToRealm();
+        buildingsToRealm();
     }
 
 
@@ -390,11 +402,11 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
 
     public boolean isTimeInRealm() {
         long temp;
-        RealmSleep realmSleep = realm.where(RealmSleep.class).findAllAsync().last();
+        RealmSleep realmSleep = realm.where(RealmSleep.class).findAll().last();
         realm.beginTransaction();
         temp = realmSleep.getTimeLeft();
         realm.commitTransaction();
-        if (temp !=0) {
+        if (!(temp - 1000 <= 0)) {
             return true;
         } else
             return false;
@@ -402,7 +414,7 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
 
     public long sleepFromRealm() {
         long temp;
-        RealmSleep realmSleep = realm.where(RealmSleep.class).findAllAsync().last();
+        RealmSleep realmSleep = realm.where(RealmSleep.class).findAll().last();
         realm.beginTransaction();
         temp = realmSleep.getTimeLeft();
         realm.commitTransaction();
@@ -430,6 +442,9 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
         buildedList.add(getResources().getInteger(R.integer.FOOD_INSTRUMENT_INDEX), 0);
         buildedList.add(getResources().getInteger(R.integer.BED_INDEX), 0);
         buildedList.add(getResources().getInteger(R.integer.STORAGE_INDEX), 0);
+
+        resourcesToRealm();
+        buildingsToRealm();
     }
 
     private void setTextsFromList() {
@@ -442,20 +457,27 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     @Override
-    protected void onStop() {
+    protected void onPause() {
+        stopPlayer();
+
+
         if (realm != null && !realm.isClosed()) {
             setAllToRealm();
-
         }
-        super.onStop();
-
+        super.onPause();
     }
 
+    @Override
+    protected void onStop() {
+        stopPlayer();
+        super.onStop();
+    }
 
     //onDestroy
     @Override
     protected void onDestroy() {
-        realm.close();
+        if (!realm.isClosed())
+            realm.close();
         Realm.compactRealm(Realm.getDefaultConfiguration());
         super.onDestroy();
     }
@@ -475,17 +497,30 @@ public class PlayActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     private void showSnackbar(String text) {
-        Snackbar.make(coordinatorLayout, text, 400).show();
+        Snackbar.make(coordinatorLayout, text, 700).show();
     }
 
     public Realm getRealm() {
         return realm;
     }
 
-    private long timeLeft() {
-        long time;
-        SleepFragment sleepFragment = new SleepFragment();
-        time =sleepFragment.getTimeLeft();
-        return time;
+    public MediaPlayer getPlayer() {
+        return player;
+    }
+
+    public void stopPlayer() {
+        if (player != null) {
+            player.pause();
+            player.release();
+            player = null;
+        }
+    }
+
+    public void startPlayer() {
+        if (player == null) {
+            player = MediaPlayer.create(this, R.raw.beach_music);
+        }
+        player.setLooping(true);
+        player.start();
     }
 }

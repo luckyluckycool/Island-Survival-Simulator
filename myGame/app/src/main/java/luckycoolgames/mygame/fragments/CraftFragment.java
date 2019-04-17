@@ -7,9 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import luckycoolgames.mygame.Activities.PlayActivity;
+import luckycoolgames.mygame.activities.PlayActivity;
 import luckycoolgames.mygame.R;
 
 
@@ -53,7 +52,7 @@ public class CraftFragment extends Fragment {
                                 showSnackbar("Nice try, but you have two left hands");
                             }
                         } else {
-                            showSnackbar("You need 5 woods, 3 stones, 10 fibers and 20 stamina");
+                            showSnackbar("You need 5 woods, 3 stones, 10 fibers and more than 20 stamina");
                         }
                         break;
                 }
@@ -77,7 +76,7 @@ public class CraftFragment extends Fragment {
                                 showSnackbar("Nice try, but you have two left hands");
                             }
                         } else {
-                            showSnackbar("You need 4 woods, 4 stones, 10 fibers and 20 stamina");
+                            showSnackbar("You need 4 woods, 4 stones, 10 fibers and more than 20 stamina");
                         }
                         break;
                 }
@@ -100,7 +99,7 @@ public class CraftFragment extends Fragment {
                                 showSnackbar("Nice try, but you have two left hands");
                             }
                         } else {
-                            showSnackbar("You need 3 woods, 3 stones, 8 fibers and 20 stamina");
+                            showSnackbar("You need 3 woods, 3 stones, 8 fibers and more than 20 stamina");
                         }
                         break;
                 }
@@ -123,7 +122,7 @@ public class CraftFragment extends Fragment {
                                 showSnackbar("Nice try, but you have two left hands");
                             }
                         } else {
-                            showSnackbar("You need 20 fibers and 20 stamina");
+                            showSnackbar("You need 20 fibers and more than 20 stamina");
                         }
                         break;
                 }
@@ -147,7 +146,7 @@ public class CraftFragment extends Fragment {
                                 showSnackbar("Nice try, but you have two left hands");
                             }
                         } else {
-                            showSnackbar("You need 20 wood, 15 fibers and 20 stamina");
+                            showSnackbar("You need 20 wood, 15 fibers and more than 20 stamina");
                         }
                         break;
                 }
@@ -171,7 +170,7 @@ public class CraftFragment extends Fragment {
                                 showSnackbar("Nice try, but you have two left hands");
                             }
                         } else {
-                            showSnackbar("You need 30 wood, 40 fibers and 50 stamina");
+                            showSnackbar("You need 30 wood, 40 fibers and more than 50 stamina");
                         }
                         break;
                 }
@@ -367,6 +366,6 @@ public class CraftFragment extends Fragment {
     }
 
     private void showSnackbar(String text) {
-        ((PlayActivity) getActivity()).showSnackbar(text, 1500);
+        ((PlayActivity) getActivity()).showSnackbar(text, 3000);
     }
 }
